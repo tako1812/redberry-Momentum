@@ -1,0 +1,131 @@
+.section-filters{
+    padding: 4.8rem 0 3.2rem 0;
+
+    .filters-container{
+        @include container;
+        display:flex;
+        flex-direction: column;
+        gap:2rem;
+
+        h2{
+            font-size:4.4rem;
+        }
+
+        .filters-box {
+            max-width:45em;
+            display:flex;
+            align-items: center;
+            gap:4rem;
+            border:1px solid $border-color;
+            border-radius: 9px;
+            padding:0.5rem 1rem;
+
+
+            .btn-filter{
+                display:flex;
+                align-items: center;
+                gap:0.3rem;
+            }
+
+            .multiple-selector-container{
+                border: 0.5px solid $border-color;
+                border-radius: 9px;
+                width: 50rem;
+                height: 20rem;
+                background-color: #fff;
+                box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                padding: 2rem;
+
+                position: absolute;
+                
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+
+                &-1{
+                   left: 9%;
+                   top: 35%;
+                }
+                &-2{
+                    width: 40rem;
+                    height: 15rem;
+                    top: 35%;
+                }
+                &-3{
+                    top: 35%;
+                }
+
+                
+            }
+            .arrow-icon{
+                width:1.7rem;
+                height:1.7rem;
+            }
+        
+        }
+
+    }
+
+    .user-inputs-container{
+        display: flex;
+        gap: 1.2rem;
+        padding: 0 2rem;
+
+        .chosen-inputs {
+            display: flex;
+            gap: 1.2rem;
+
+            .filtered-item {
+                display: flex;
+                align-items: center;
+                border: 1px solid #999;
+                border-radius: 12px;
+                padding: 0.7rem 1.2rem;
+
+
+              &:p{
+                font-size: 1.5rem;
+                font-weight: 500;
+              }
+            }
+            .btn-clear {
+                font-size: 1.8rem;
+                font-weight: 700;
+            }
+        }
+
+    }
+}
+/*
+  .user-inputs-container{
+    display: flex;
+    gap: 1.2rem;
+    padding: 0 2rem;
+  }
+  .chosen-inputs {
+    display: flex;
+    gap: 1.2rem;
+  }
+  .filtered-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #999;
+    border-radius: 12px;
+    padding: 0.7rem 1.2rem;
+  }
+  .filtered-item p {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+  .close-icon {
+    font-size: 2rem;
+    font-weight: 500;
+  }
+  .btn-clear {
+    font-size: 1.8rem;
+    font-weight: 700;
+  }*/
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+}

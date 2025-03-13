@@ -8,3 +8,34 @@ html {
   font-size: 62.5%; //1 rem = 10px; 10px/16px = 62.5%
 }
 
+.btn {
+  &,
+  &:link,
+  &:visited{
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  &-filter:hover {
+      color: $color-primary-dark;
+
+  }
+
+  &-choose{
+    padding:0.5rem 3rem;
+    border-radius: 15px;
+    background-color: $color-primary-dark;
+    color:#fff;
+
+
+    align-self: flex-end;
+
+    
+  }
+
+
+
+}
+

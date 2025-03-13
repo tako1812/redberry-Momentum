@@ -2,11 +2,10 @@ header {
   @include container;
 
   .header-container {
-    //display: flex;
-    //align-items: center;
-    //gap: 20rem;
-
-    //justify-content: space-between;
+    margin-top: 2rem;      
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     nav {
       ul {
         list-style: none;

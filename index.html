@@ -28,11 +28,119 @@
         </nav>
       </div>
     </header>
+    <main>
+      <section class="section-filters">
+        <div class="filters-container">
+          <h2>დავალებების გვერდი</h2>
+          <div class="filters-box">
+            <div class="filter-selectors-container">
+              <div class="filter-btn-conatiner">
+                <button class="btn btn-filter" data-filter-btn ="1">
+                  <span>დეპარტამენტი</span>
+                  <ion-icon class="arrow-icon"name="chevron-down-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="multiple-selector-container selector-department filter-selector-1 hidden">
+                <div class="input-label-container">
+                  <label for="department1">
+                    <input
+                      class="user-input"
+                      type="checkbox"
+                      id="department1"
+                      name="department1"
+                      value="მარკეტინგის დეპარტამენტი"
+                    />
+                  მარკეტინგის დეპარტამენტი</label>
+                </div>
+                <div class="input-label-container">
+                  <label for="department2">
+                    <input
+                      class="user-input"
+                      type="checkbox"
+                      id="department2"
+                      name="department2"
+                      value="it დეპარტამენტი"
+                    />
+                  it დეპარტამენტი</label>
+                </div>
+                <button type="submit" class="btn btn-choose">
+                    არჩევა
+                </button>
+              </div>
+            </div>
+            <div class="filter-department">
+              <div class="filter-btn-conatiner">
+                <button class="btn btn-filter" data-filter-btn ="2">პრიორიტეტი
+                  <ion-icon class="arrow-icon"name="chevron-down-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="multiple-selector-container  selector-priority filter-selector-2 hidden">
+                <div class="input-label-container">
+                  <input
+                    class="user-input"
+                    type="checkbox"
+                    id="department1"
+                    name="department1"
+                    value="მარკეტინგის დეპარტამენტი"
+                  />
+                  <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                </div>
+                <button type="submit" class="btn btn-choose">
+                    არჩევა
+                </button>
+              </div>
+            </div>
+            <div class="filter-department">
+              <div class="filter-btn-conatiner">
+                <button class="btn btn-filter" data-filter-btn ="3">
+                  <span>თანაშრომელი</span>
+                  <ion-icon class="arrow-icon"name="chevron-down-outline"></ion-icon>
+                </button>
+              </div>
+              <div class="multiple-selector-container selector-employee filter-selector-3 hidden">
+                <div class="input-label-container">
+                  <input
+                    class="user-input"
+                    type="checkbox"
+                    id="department1"
+                    name="department1"
+                    value="მარკეტინგის დეპარტამენტი"
+                  />
+                  <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                </div>
+                <button type="submit" class="btn btn-choose">
+                    არჩევა
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="user-inputs-container">
+          <div class="chosen-inputs">
+            <div class="filtered-item">
+              <p>დეპარტამენტი</p>
+              <ion-icon class="close-icon" name="close-outline"></ion-icon>
+            </div>
+            <div class="filtered-item">
+              <p>პრიორიტეტი</p>
+              <ion-icon class="close-icon" name="close-outline"></ion-icon>
+            </div>
+            <div class="filtered-item">
+              <p>თანამსრომეი</p>
+              <ion-icon class="close-icon" name="close-outline"></ion-icon>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-clear hidden">გასუფთავება</button>
+        </div>
 
-    <main></main>
+      </section>
+
+    </main>
 
     <footer></footer>
 
-    <script src="./js/script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
+    <script src="./js/addedListings.js"></script>
   </body>
 </html>

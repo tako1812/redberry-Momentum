@@ -1,0 +1,47 @@
+header {
+  @include container;
+
+  .header-container {
+    //display: flex;
+    //align-items: center;
+    //gap: 20rem;
+
+    //justify-content: space-between;
+    nav {
+      ul {
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap:2rem;
+  
+        li {
+          a:link,
+          a:visited {
+            display:inline-block;
+            text-decoration: none;
+            font-size:1.4rem;
+            padding: 1.2rem 1.8em;
+
+            /*
+            &:nth-child(1){
+              color:black;
+            }*/
+
+            &:last-child{
+              display:flex;
+              align-items: center;
+              gap:0.5rem;
+              color:#fff;
+              background-color: $color-primary-dark;
+
+            }
+            &:last-child:hover{
+              background-color: $color-primary-light;
+
+            }
+          }
+        }
+      }
+    }
+  }
+}

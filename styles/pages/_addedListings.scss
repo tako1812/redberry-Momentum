@@ -101,35 +101,148 @@
 
     }
 }
-/*
-  .user-inputs-container{
-    display: flex;
-    gap: 1.2rem;
-    padding: 0 2rem;
+.section-tasks{
+  padding: 4.8rem 0 3.2rem 0;
+
+  .tasks-container{
+    @include container;
+
+
+    .tasks-type-container{
+       display:flex;
+       justify-content: space-between;
+
+       div {
+        padding: 1.5rem 10rem;
+        border-radius: 10px;
+        color:#fff;
+        
+
+
+        &:nth-child(1) {
+          background-color: #F7BC30;
+        }
+        &:nth-child(2) {
+          background-color: #FB5607;
+        }
+        &:nth-child(3) {
+          background-color: #FF006E;
+        }
+        &:nth-child(4) {
+          background-color: #3A86FF;
+        }
+       }
+    }
+
+
+
+    .taskCard-container{
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin-top: 3rem;
+
+
+      .task-card{
+        width:28rem;
+        height:15rem;
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        padding:1.5rem;
+        border-radius: 9px;
+
+        display:flex;
+        flex-direction: column;
+        gap:2rem;
+      
+      
+        
+        .task-card-categories {
+          display:flex;
+          align-items: center;
+          justify-content: space-between;
+          
+          div{
+            display: flex;
+            align-items: center;
+            gap:0.5rem;
+          }
+
+          .task-category{
+            padding:0.3rem 0.8rem;
+            border: 0.5px solid black;
+            border-radius:4px;
+            display:flex;
+            align-items: center;
+            gap:0.5rem;
+          }
+          .department {
+            padding:0.7rem 1.2rem;
+            background-color: #F7BC30;
+            color:#fff;
+            border-radius:10px;
+            text-align: center;  
+          } 
+        }
+
+        .task-card-description{
+          display:flex;
+          flex-direction: column;
+          gap:0.5rem;
+
+          h3{
+            font-size:1.2rem;
+          }
+
+
+        }
+        .task-card-employee{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          img{
+            width:1.8rem;
+            height:1.8rem;
+            border-radius: 10px;
+
+          }
+          div{
+            display:flex;
+            align-items: center;
+            gap: 0.5rem;
+          }
+
+        }
+        
+
+      
+        
+
+      }
+    }
   }
-  .chosen-inputs {
-    display: flex;
-    gap: 1.2rem;
-  }
-  .filtered-item {
-    display: flex;
-    align-items: center;
-    border: 1px solid #999;
-    border-radius: 12px;
-    padding: 0.7rem 1.2rem;
-  }
-  .filtered-item p {
-    font-size: 1.5rem;
-    font-weight: 500;
-  }
-  .close-icon {
-    font-size: 2rem;
-    font-weight: 500;
-  }
-  .btn-clear {
-    font-size: 1.8rem;
-    font-weight: 700;
-  }*/
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .hidden {
     visibility: hidden;
     opacity: 0;

@@ -31,11 +31,7 @@ const hideFilterContainer = function(e) {
     const data = clicked.getAttribute("data-btn");
     document.querySelector(`.filter-selector-${data}`).classList.add("hidden");
 }
-
 filtersBox.addEventListener("click", hideFilterContainer);
-
-
-
 
 /////////////////////////////////////////////////////
 ///

@@ -228,7 +228,7 @@ header .header-container nav ul li a:visited:last-child:hover {
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
 }
 .section-filters .filters-container .filters-box .multiple-selector-container-1 {
   left: 9%;
@@ -241,6 +241,14 @@ header .header-container nav ul li a:visited:last-child:hover {
 }
 .section-filters .filters-container .filters-box .multiple-selector-container-3 {
   top: 35%;
+}
+.section-filters .filters-container .filters-box .multiple-selector-container .department-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.section-filters .filters-container .filters-box .multiple-selector-container .btn-choose {
+  align-self: self-end;
 }
 .section-filters .filters-container .filters-box .arrow-icon {
   width: 1.7rem;

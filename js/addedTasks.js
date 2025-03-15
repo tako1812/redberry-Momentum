@@ -1,10 +1,8 @@
 
-
 const filtersBox = document.querySelector(".filters-box");
-
 const btnClear = document.querySelector(".btn-clear");
 const userInputsContainer =document.querySelector(".chosen-inputs");
-
+let departments =[];
 
 
 //////////////////////////////////////
@@ -35,6 +33,47 @@ filtersBox.addEventListener("click", hideFilterContainer);
 
 /////////////////////////////////////////////////////
 ///
+//const departmentsContainer = document.querySelector(".department-container");
+
+const departmentContainer = document.querySelector(".department-container");
+  
+  const renderFiltersDepartment = async function () {
+    departmentContainer.innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/departments"
+    );
+    const datas = await res.json();
+    console.log(datas);
+    departments = datas;
+  
+    datas.map(data => {
+        const html = `
+        <label for="department1">
+        <input
+            class="user-input"
+            type="checkbox"
+            id="department1"
+            name="department1"
+            value="${data.name}"
+        />
+        ${data.name}
+        </label>
+        `;
+
+        departmentContainer.insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  renderFiltersDepartment();
+
+
+
+
+
+
+//////////////////////////////////////////////////
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+////////////////////////////////////////////////
 const departmentsSelector= document.querySelector(".selector-department"); 
 const prioritiesSelector= document.querySelector(".selector-priority");
 const employeesSelector= document.querySelector(".selector-employee");  
@@ -155,8 +194,54 @@ const renderPriorities = async function () {
         prioritiesContainer.insertAdjacentHTML("afterbegin", html);
     });
 
-    /*
-      regionsContainer.insertAdjacentHTML("afterbegin", html);
-    });*/
   };
   renderPriorities();
+  ////////////////////////////////////////////
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+
+  const statusesContainer = document.querySelector(".statuses-container");
+  
+  const renderStatuses = async function () {
+    statusesContainer.innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/statuses"
+    );
+    const datas = await res.json();
+    console.log(datas);
+  
+    datas.map(data => {
+        const html = `
+        <option value="${data.name}">${data.name}</option>
+        `;
+
+        statusesContainer.insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  renderStatuses();
+  ////////////////////////////////////////////
+  ///////////////////////////////////////////
+  ///////////////////////////////////////////
+
+ /*
+  const departmentsContainer = document.querySelector(".department-container");
+  
+  const renderDepartments = async function () {
+    departmentsContainer .innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/departments"
+    );
+    const datas = await res.json();
+    console.log(datas);
+    departments = datas;
+  
+    datas.map(data => {
+        const html = `
+        <option value="${data.name}">${data.name}</option>
+        `;
+
+        departmentsContainer .insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  renderDepartments();
+*/

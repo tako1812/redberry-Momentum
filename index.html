@@ -41,27 +41,18 @@
                 </button>
               </div>
               <div class="multiple-selector-container selector-department filter-selector-1 hidden">
-                <div class="input-label-container">
-                  <label for="department1">
-                    <input
+                <div class="department-container">
+                  <div class="input-label-container">
+                    <label for="department1">
+                      <input
                       class="user-input"
                       type="checkbox"
                       id="department1"
                       name="department1"
                       value="მარკეტინგის დეპარტამენტი"
-                    />
-                  მარკეტინგის დეპარტამენტი</label>
-                </div>
-                <div class="input-label-container">
-                  <label for="department2">
-                    <input
-                      class="user-input"
-                      type="checkbox"
-                      id="department2"
-                      name="department2"
-                      value="it დეპარტამენტი"
-                    />
-                  it დეპარტამენტი</label>
+                      />
+                    მარკეტინგის დეპარტამენტი</label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-choose" data-btn ="1">
                     არჩევა
@@ -215,7 +206,7 @@
                 <div>
                   <label for="select-department">დეპარტამენტი*</label>
                   <select
-                    class="select"
+                    class="department-container"
                     name="department"
                     id="select-department2"
                   >
@@ -245,7 +236,7 @@
                   </div>
                 </div>
                 <div>
-                  <label for="select-employee">თანამშრომელი*</label>
+                  <label for="select-employee">პასუხისმგებელი თანამშრომელი*</label>
                   <select
                     class="select"
                     name="employee"
@@ -258,9 +249,6 @@
   
                 </div>
               </div>
-
-
-
 
 
               <div class="grid-container">
@@ -284,7 +272,7 @@
                   <div>
                     <label for="select-status">სტატუსი*</label>
                     <select
-                      class="select"
+                      class="statuses-container"
                       name="status"
                       id="select-status3"
                     >
@@ -299,7 +287,7 @@
                 </div>
                 <div>
                   <label>დედლაინი</label>
-                  <input type="date" name="bday"/>
+                    <input class="data-input" type="date"/>
                 </div>
               </div>      
             </div>  

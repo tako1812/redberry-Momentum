@@ -187,6 +187,8 @@
 
       </section>
       
+
+
       <section class="test">
         <div class="create-task-container">
           <h2>შექმენი ახალი დავალება</h2>
@@ -201,12 +203,14 @@
                     type="text"
                     name="title"
                   />
-                  <p class="valid-symbols">
-                    მინიმუმ 2 სიმბოლო
-                  </p>
-                  <p class="valid-symbols">
-                    მაქსიმუმ 255 სიმბოლო
-                  </p>
+                  <div class="title-validation-text">
+                    <p>
+                      მინიმუმ 2 სიმბოლო
+                    </p>
+                    <p>
+                      მაქსიმუმ 255 სიმბოლო
+                    </p>
+                  </div>
                 </div>
                 <div>
                   <label for="select-department">დეპარტამენტი*</label>
@@ -224,17 +228,21 @@
               </div>
               <div class="grid-container">
                 <div>
-                  <label for="select-department">დეპარტამენტი*</label>
-                  <select
-                    class="select"
-                    name="department"
-                    id="select-department2"
-                  >
-                    <option value="havetoStart">დაბალი</option>
-                    <option value="მაღლი">მაღალი</option>
-                    <option value="კახეთი">საშუალო</option>
-                  </select>
-  
+                  <label for="description">აღწერა </label>
+                  <textarea
+                    name="description"
+                    class="task-description"
+                    minlength="2"
+                    maxlength="255"
+                  ></textarea>
+                  <div class="description-validation-text">
+                    <p>
+                      მინიმუმ 2 სიმბოლო
+                    </p>
+                    <p>
+                      მაქსიმუმ 255 სიმბოლო
+                    </p>
+                  </div>
                 </div>
                 <div>
                   <label for="select-employee">თანამშრომელი*</label>
@@ -250,18 +258,26 @@
   
                 </div>
               </div>
+
+
+
+
+
               <div class="grid-container">
                 <div class="priority-status-container">
                   <div>
                     <label for="select-priority">პრიორიტეტი*</label>
                     <select
-                      class="select"
+                      class="priorities-continer"
                       name="priority"
                       id="select-priority4"
                     >
+                      <option class="image"value="111"style="background-image:url(./assets/images/Medium.png)"; ></option>
+                    
                       <option value="დაბალი">დაბალი</option>
-                      <option value="მაღლი">მაღალი</option>
-                      <option value="კახეთი">საშუალო</option>
+                      
+                      <option style="background-image:url();">male</option>
+                      
                     </select>
     
                   </div>
@@ -290,6 +306,7 @@
           </form>
         </div>
       </section>
+      
 
     </main>
 
@@ -297,6 +314,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
-    <script src="./js/addedListings.js"></script>
+    <script src="./js/addedTasks.js"></script>
+    <script src="./js/validations.js"></script>
   </body>
 </html>

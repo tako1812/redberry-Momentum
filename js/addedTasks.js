@@ -311,6 +311,7 @@ const renderPriorities = async function () {
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
+/// ADD EMPLOYEE
 // preview image
 const inputFile = document.querySelector(".image-upload");
 const previewConatiner = document.querySelector(".image-preview-container");
@@ -334,3 +335,17 @@ inputFile.addEventListener("change", function() {
     }
 
 })
+//////////////////////////////////////////
+//  toggle modal window
+const btnAddEmployee = document.querySelector(".btn-add-employee");
+const addEmployeeWindow = document.querySelector(".add-employee-window");
+const overlay = document.querySelector(".overlay");
+const cancelbtn = document.querySelector(".cancel-icon");
+
+const toggleModalWindow = function() {
+    addEmployeeWindow.classList.toggle("hidden");
+    overlay.classList.toggle("hidden");
+};
+
+[cancelbtn, overlay, btnAddEmployee].forEach((el) => 
+    el.addEventListener("click", toggleModalWindow));

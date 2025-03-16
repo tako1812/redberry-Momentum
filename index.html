@@ -19,7 +19,7 @@
         <nav>
           <ul class="main-nav-list">
             <li>
-              <a href="#">თანამშრომლის შექმნა</a>
+              <button class="btn btn-add-employee">თანამშრომლის შექმნა</button>
             </li>
             <li>
               <a href="#"><img src="assets/icons/add.png" />შექმენი ახალი დავალება</a>
@@ -325,8 +325,11 @@
 
       
       <div class="overlay hidden"></div>
-      <div class="add-employee-window">
-        <h2 class="heading">აგენტის დამატება</h2>
+      <div class="add-employee-window hidden">
+        <div class="cancel-icon-box">
+          <img class="cancel-icon" src="./assets/icons/Cancel.png" alt="cancel icon"/>
+        </div>
+        <h2 class="heading">დავალების დამატება</h2>
         <form class="form add-employee-form">
           <div class="employee-info-container">
             <div class="fullName-container">
@@ -339,7 +342,7 @@
                   name="name"
                   required
                 />
-                <div class="title-validation-text">
+                <div class="name-validation-text">
                   <p>
                     მინიმუმ 2 სიმბოლო
                   </p>
@@ -351,7 +354,7 @@
               <div>
                 <label for="surname">გვარი*</label>
                 <input class="form-input-surname" id="surname" name="surname" type="text" required />
-                <div class="title-validation-text">
+                <div class="surname-validation-text">
                   <p>
                     მინიმუმ 2 სიმბოლო
                   </p>

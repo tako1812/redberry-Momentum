@@ -5,6 +5,12 @@ const taskDescription = document.querySelector(".task-description");
 const titleValidationText = document.querySelector(".title-validation-text");
 const descriptionValidationText = document.querySelector(".description-validation-text");
 
+const inputName = document.querySelector(".form-input-name");
+const nameValidationText = document.querySelector(".name-validation-text")
+const inputSurname = document.querySelector(".form-input-surname");
+const surnameValidationText = document.querySelector(".surname-validation-text")
+
+
 
 const checkMinSymbols = (input) => input.trim().length >= 2;
 const checkMaxSymbols = (input) => input.trim().length <= 255;
@@ -68,12 +74,42 @@ const checkSymbolsValidation = function() {
     }
     
 }*/
-//////////////////////////////
+/////////////////////////////////////////
+////////////////////////////////////////
+const checkNameValidation = function() {
+    
+    let nameValue = inputName.value;
+    console.log(nameValue);
+
+    if(checkMinSymbols(nameValue)){ 
+        //titleValidationText.classList.add("valid");
+        nameValidationText.style.color = "green";
+    }
+
+    if(!checkMinSymbols(nameValue)) {
+        nameValidationText.classList.add("invalid");
+    } 
+    
+}
+
+const checkSurnameValidation = function() {
+    
+    let surnameValue = inputSurname.value;
+
+    if(!checkMinSymbols(surnameValue)) {
+        surnameValidationText.classList.add("invalid");
+    } 
+    if(checkMinSymbols(surnameValue)){ 
+        //titleValidationText.classList.add("valid");
+        surnameValidationText.style.color = "green";
+    }
+}
+
 const checkTitleValidation = function() {
     
     //const title = e.target.value;
     let title = inputTitle.value;
-    console.log(title);
+
 
     if(!checkMinSymbols(title)) {
         titleValidationText.classList.add("invalid");
@@ -95,6 +131,8 @@ const checkDescriptionValidation = function() {
     }
 }
 
-inputTitle.addEventListener("input", checkTitleValidation );
+inputTitle.addEventListener("input", checkTitleValidation);
 taskDescription.addEventListener("input", checkDescriptionValidation);
+inputName.addEventListener("input", checkNameValidation);
+inputSurname.addEventListener("input", checkSurnameValidation);
 

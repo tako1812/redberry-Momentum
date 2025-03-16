@@ -22,6 +22,18 @@ html {
       color: $color-primary-dark;
 
   }
+  &-create{
+    padding:0.8rem 2.2rem;
+    background-color: $color-primary-dark;
+    border-radius: 5px;
+    color:#fff;
+  }
+  &-cancel{
+    padding:0.8rem 1.8rem;
+    border-radius: 5px;
+    border:1px solid $color-primary-dark;
+
+  }
 
   &-choose{
     padding:0.5rem 3rem;

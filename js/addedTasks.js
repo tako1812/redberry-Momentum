@@ -1,7 +1,6 @@
 
 const filtersBox = document.querySelector(".filters-box");
 const btnClear = document.querySelector(".btn-clear");
-const userInputsContainer =document.querySelector(".chosen-inputs");
 let departments =[];
 
 
@@ -33,9 +32,7 @@ filtersBox.addEventListener("click", hideFilterContainer);
 
 /////////////////////////////////////////////////////
 ///
-//const departmentsContainer = document.querySelector(".department-container");
-
-const departmentContainer = document.querySelector(".department-container");
+const departmentContainer = document.querySelector(".filter-department-container");
   
   const renderFiltersDepartment = async function () {
     departmentContainer.innerHTML = "";
@@ -59,17 +56,41 @@ const departmentContainer = document.querySelector(".department-container");
         ${data.name}
         </label>
         `;
-
         departmentContainer.insertAdjacentHTML("afterbegin", html);
     });
   };
   renderFiltersDepartment();
+//////////////////////////////////////////
+/////////////////////////////////////////
+///
+const filterPrioritiesContainer = document.querySelector(".fiter-priorities-container");
+const renderFiltersPriorities = async function () {
+    filterPrioritiesContainer.innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/priorities"
+    );
+    const datas = await res.json();
+    console.log(datas);
+  
+    datas.map(data => {
+        const html = `
+        <div class="input-label-container">
+            <input
+            class="user-input"
+            type="checkbox"
+            id="department1"
+            name="department1"
+            value="${data.name}"
+            />
+            <label for="department1">${data.name}</label>
+      </div>
+        `;
 
+        filterPrioritiesContainer.insertAdjacentHTML("afterbegin", html);
+    });
 
-
-
-
-
+  };
+  renderFiltersPriorities();
 //////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -118,16 +139,49 @@ const getUserInput = function(e) {
     
 };
 
+ //class="employee"
+ const allEmployee = document.querySelectorAll(".employee");
+const makeOneSelection = function() {
+
+    let selection = 0;
+
+    allEmployee.forEach(employee => {
+       if(employee.checked == true) {
+        selection += 1;
+       }
+    });
+    if(selection > 1){
+        console.log(2222);
+        return false;
+    }
+    console.log(selection);
+
+
+}
+//console.log(makeOneSelection());
+
+allEmployee.forEach(employee => {
+    employee.addEventListener("click", function() {
+        return makeOneSelection();
+    })
+})
+
+//////////////////////////////////////
+//employeesSelector.addEventListener("click", makeOneSelection);
 departmentsSelector. addEventListener("click", getUserInput.bind(chosenDepartment));
 prioritiesSelector.addEventListener("click", getUserInput.bind(chosenPriorities));
-employeesSelector.addEventListener("click", getUserInput.bind(chosenEmployee));
-
-
+//employeesSelector.addEventListener("click", getUserInput.bind(chosenEmployee));
+///
+///
+////
+///////////////////////////////////////
+//////////////////////////////////////
+///
+const selectionsContainer = document.querySelector(".selections-container");
+selectionsContainer.innerHTML = "";
 const renderUserInputsBtns = function(e) {
     const clicked = e.target.closest(".btn-choose");
     if(!clicked) return;
-
-
 
   let html = chosenDepartment.map(
     (department) => `
@@ -145,12 +199,21 @@ const renderUserInputsBtns = function(e) {
         <ion-icon  class="close-icon" name="close-outline"></ion-icon>
     </div>`
   );
-  //if (html) btnClear.classList.remove("hidden");
+  if (html) btnClear.classList.remove("hidden");
   
 
+  /*
+  html +=  chosenEmployee.map(
+    (priority) => `
+    <div class="filtered-item">
+        <p>${priority}</p>
+        <ion-icon  class="close-icon" name="close-outline"></ion-icon>
+    </div>`
+  );
+  if (html) btnClear.classList.remove("hidden");*/
 
-
-  userInputsContainer.innerHTML = html;
+  
+  selectionsContainer.innerHTML = html;
 
 }
 
@@ -245,3 +308,29 @@ const renderPriorities = async function () {
   };
   renderDepartments();
 */
+///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+// preview image
+const inputFile = document.querySelector(".image-upload");
+const previewConatiner = document.querySelector(".image-preview-container");
+const imagePreview = document.querySelector(".image-preview--image");
+const defaultTextImage = document.querySelector(".default-text-image");
+
+inputFile.addEventListener("change", function() {
+    const file = this.files[0];
+    console.log(file);
+
+    if(file) {
+        const reader = new FileReader();
+
+        defaultTextImage.style.display = "none";
+        imagePreview.style.display ="block";
+
+        reader.addEventListener("load", function(){
+            imagePreview.setAttribute("src", this.result);
+        })
+        reader.readAsDataURL(file);
+    }
+
+})

@@ -41,7 +41,7 @@
                 </button>
               </div>
               <div class="multiple-selector-container selector-department filter-selector-1 hidden">
-                <div class="department-container">
+                <div class="filter-department-container grid-container">
                   <div class="input-label-container">
                     <label for="department1">
                       <input
@@ -66,25 +66,27 @@
                 </button>
               </div>
               <div class="multiple-selector-container  selector-priority filter-selector-2 hidden">
-                <div class="input-label-container">
-                  <input
+                <div class="fiter-priorities-container">
+                  <div class="input-label-container">
+                    <input
                     class="user-input"
                     type="checkbox"
                     id="department1"
                     name="department1"
                     value="მარკეტინგის დეპარტამენტი"
-                  />
-                  <label for="department1">მარკეტინგის დეპარტამენტი</label>
-                </div>
-                <div class="input-label-container">
-                  <input
+                    />
+                    <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                  </div>
+                  <div class="input-label-container">
+                    <input
                     class="user-input"
                     type="checkbox"
                     id="department1"
                     name="department1"
                     value="მარკეტინგის დეპარტამენტი"
-                  />
-                  <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                    />
+                    <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-choose" data-btn ="2">
                     არჩევა
@@ -99,15 +101,39 @@
                 </button>
               </div>
               <div class="multiple-selector-container selector-employee filter-selector-3 hidden">
-                <div class="input-label-container">
-                  <input
-                    class="user-input"
+                <div class="filter-employee-container grid-container">
+                  <div class="input-label-container">
+                    <input
+                    class="employee"
                     type="checkbox"
                     id="department1"
                     name="department1"
                     value="მარკეტინგის დეპარტამენტი"
-                  />
-                  <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                    />
+                    <label for="department1">მარკეტინგის დეპარტამენტი</label>
+                  </div>
+                  <div class="input-label-container">
+                    <label for="employee1">
+                      <input
+                      class="employee user-input"
+                      type="checkbox"
+                      id="employee1"
+                      name="department1"
+                      value="მარკეტინგის დეპარტამენტი"
+                      />
+                    მარკეტინგის დეპარტამენტი</label>
+                  </div>
+                  <div class="input-label-container">
+                    <label for="employee2">
+                      <input
+                      class="employee user-input"
+                      type="checkbox"
+                      id="employee2"
+                      name="department1"
+                      value="მარკეტინგის დეპარტამენტი"
+                      />
+                    მარკეტინგის დეპარტამენტი</label>
+                  </div>
                 </div>
                 <button type="submit" class="btn btn-choose" data-btn ="3">
                     არჩევა
@@ -117,7 +143,7 @@
           </div>
         </div>
         <div class="user-inputs-container">
-          <div class="chosen-inputs">
+          <div class="selections-container">
             <div class="filtered-item">
               <p>დეპარტამენტი</p>
               <ion-icon class="close-icon" name="close-outline"></ion-icon>
@@ -294,7 +320,95 @@
           </form>
         </div>
       </section>
+
+
+
       
+      <div class="overlay hidden"></div>
+      <div class="add-employee-window">
+        <h2 class="heading">აგენტის დამატება</h2>
+        <form class="form add-employee-form">
+          <div class="employee-info-container">
+            <div class="fullName-container">
+              <div>
+                <label for="first-name">სახელი*</label>
+                <input
+                  class="form-input-name"
+                  id="first-name"
+                  type="text"
+                  name="name"
+                  required
+                />
+                <div class="title-validation-text">
+                  <p>
+                    მინიმუმ 2 სიმბოლო
+                  </p>
+                  <p>
+                    მაქსიმუმ 255 სიმბოლო
+                  </p>
+                </div>
+              </div>
+              <div>
+                <label for="surname">გვარი*</label>
+                <input class="form-input-surname" id="surname" name="surname" type="text" required />
+                <div class="title-validation-text">
+                  <p>
+                    მინიმუმ 2 სიმბოლო
+                  </p>
+                  <p>
+                    მაქსიმუმ 255 სიმბოლო
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="image-container">
+                <label for="file-upload">ავატარი*
+                  <div class="uploadImg-container">
+                    <input
+                      class="image-upload"
+                      type="file"
+                      id="file-upload"
+                      name="avatar"
+                      accept=".jpg, .png"
+                    />
+                    <div class="image-preview-container">
+                      <img src="" alt="image preview" class="image-preview--image"/>
+                      <div class="default-text-image">
+                        <p>ატვირთე ფოტო</p>
+                        <img src="assets/icons/addimg.png">
+                      </div>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div class="department-box">
+                <label for="select-department">დეპარტამენტი*</label>
+                <select
+                  class="department-container"
+                  name="department"
+                  id="select-department2"
+                >
+                  <option value="have">დაბალი</option>
+                  <option value="მაღლი">მაღალი</option>
+                  <option value="კახეთი">საშუალო</option>
+                </select>
+
+              </div>
+              <div class="btns-container">
+                <div>
+                  <button type ="reset"class="btn btn-cancel">გაუქმება</button>
+                  <button class="btn btn-create btn-add-imployee">
+                    დაამატე თანამშრომელი
+                  </button>
+                </div>
+              </div>
+              
+            </div>
+            
+          </div>
+        </form>
+      </div>
 
     </main>
 

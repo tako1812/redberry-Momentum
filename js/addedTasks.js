@@ -2,6 +2,7 @@
 const filtersBox = document.querySelector(".filters-box");
 const btnClear = document.querySelector(".btn-clear");
 let departments =[];
+const token = "9e73c158-43ef-4fd6-9f0e-70385f360191";
 
 
 //////////////////////////////////////
@@ -349,3 +350,77 @@ const toggleModalWindow = function() {
 
 [cancelbtn, overlay, btnAddEmployee].forEach((el) => 
     el.addEventListener("click", toggleModalWindow));
+/////////////////////////////////////////////
+///////////////////////////////////////////
+const departmentsContainer = document.querySelector(".departments-container");
+  
+  const renderDepartments = async function () {
+    departmentsContainer.innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/departments"
+    );
+    const datas = await res.json();
+    console.log(datas);
+    departments = datas;
+  
+    datas.map(data => {
+        const html = `
+        <option value="${data.id}">${data.name}</option>
+        `;
+        departmentsContainer.insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  renderDepartments();
+  ////////////////////////////////////////////
+  ///////////////////////////////////////////
+  /////////////////////////////////////////
+  //  POST REQUEST OF ADD EPLOYEE
+  //
+  const addEmployeeFormContainer = document.querySelector(".add-employee-form");
+  const btnAddEmplayee = document.querySelector(".btn-add-imployee");
+
+  const sendJson = async function(url, uploadData) {
+    try{
+        const fetchData = await fetch(url,{
+            method:"POST",
+            headers:{
+                Authorization: `Bearer ${token}`,
+                accept:"application/json",
+            },
+            body: uploadData,
+        }
+    );
+    const data = await fetchData.json();
+    return data;
+    }catch (err){
+        throw err;
+    }
+  };
+
+  const uploadData = async function(e) {
+    e.preventDefault();
+
+    const dataArr = [...new FormData(addEmployeeFormContainer)];
+    const data = Object.fromEntries(dataArr);
+    console.log(data);
+
+    const employeeData = {
+        name: data.name,
+        surname: data.surname, 
+        avatar:data.avatar, 
+        department_id: data.department
+    };
+
+    const formData = new FormData();
+
+    formData.append("name", employeeData.name);
+    formData.append("surname", employeeData.surname);
+    formData.append("avatar", employeeData.avatar);
+    formData.append("department_id", employeeData.department_id);
+
+    console.log(formData);
+    const datas = await sendJson("https://momentum.redberryinternship.ge/api/employees",formData);
+    console.log(datas);
+  };
+  addEmployeeFormContainer.addEventListener("submit",uploadData);
+

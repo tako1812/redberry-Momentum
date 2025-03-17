@@ -12,8 +12,8 @@ const surnameValidationText = document.querySelector(".surname-validation-text")
 
 
 
-const checkMinSymbols = (input) => input.trim().length >= 2;
-const checkMaxSymbols = (input) => input.trim().length <= 255;
+const checkMinSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
+//const checkMaxSymbols = (input) => input.trim().length <= 255;
 const checkData = (input) => input.split("/").length < 3;
 
 
@@ -25,7 +25,7 @@ const checkDataValidation = function() {
     const [year, data, month] = (dataInput.value).split("-");
     console.log(year,data, month);
     let datas= dataInput.value; 
-    console.log(2222);
+
 
       
     /*
@@ -79,11 +79,12 @@ const checkSymbolsValidation = function() {
 const checkNameValidation = function() {
     
     let nameValue = inputName.value;
-    console.log(nameValue);
+
 
     if(checkMinSymbols(nameValue)){ 
-        //titleValidationText.classList.add("valid");
-        nameValidationText.style.color = "green";
+        nameValidationText.classList.remove("invalid");
+        nameValidationText.classList.add("valid");
+        //nameValidationText.style.color = "green";
     }
 
     if(!checkMinSymbols(nameValue)) {

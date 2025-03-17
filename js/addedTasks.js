@@ -35,7 +35,7 @@ filtersBox.addEventListener("click", hideFilterContainer);
 ///
 const departmentContainer = document.querySelector(".filter-department-container");
   
-  const renderFiltersDepartment = async function () {
+const renderFilterDepartment = async function () {
     departmentContainer.innerHTML = "";
     const res = await fetch(
       "https://momentum.redberryinternship.ge/api/departments"
@@ -46,52 +46,61 @@ const departmentContainer = document.querySelector(".filter-department-container
   
     datas.map(data => {
         const html = `
-        <label for="department1">
-        <input
-            class="user-input"
-            type="checkbox"
-            id="department1"
-            name="department1"
-            value="${data.name}"
-        />
-        ${data.name}
-        </label>
+        <div class="input-label-container">
+            <label for="department1">
+                <input
+                class="user-input"
+                type="checkbox"
+                id="department1"
+                name="department1"
+                value="${data.id}"
+                />
+            ${data.name}</label>
+        </div>
         `;
         departmentContainer.insertAdjacentHTML("afterbegin", html);
     });
   };
-  renderFiltersDepartment();
+  renderFilterDepartment();
 //////////////////////////////////////////
 /////////////////////////////////////////
 ///
-const filterPrioritiesContainer = document.querySelector(".fiter-priorities-container");
-const renderFiltersPriorities = async function () {
-    filterPrioritiesContainer.innerHTML = "";
-    const res = await fetch(
-      "https://momentum.redberryinternship.ge/api/priorities"
-    );
-    const datas = await res.json();
-    console.log(datas);
-  
-    datas.map(data => {
-        const html = `
-        <div class="input-label-container">
-            <input
-            class="user-input"
-            type="checkbox"
-            id="department1"
-            name="department1"
-            value="${data.name}"
-            />
-            <label for="department1">${data.name}</label>
-      </div>
+const filterEmployeesContainer = document.querySelector(".filter-employees-container");
+const renderFilterEmployees = async function () {
+    filterEmployeesContainer.innerHTML = "";
+    
+    const res = await fetch("https://momentum.redberryinternship.ge/api/employees",
+        {
+            method: "GET",
+            headers: {
+            Authorization: `Bearer ${token}`,
+            accept: "application/json",
+            },
+        }
+        );
+        const datas = await res.json();
+        console.log(datas);
+
+        datas.map(data => {
+            const html = `
+            <div class="input-label-container">
+                <label for="department1">
+                    <input
+                    class="employee"
+                    type="checkbox"
+                    id="${data.id}"
+                    name="department1"
+                    value="${data.name} ${data.surname}"
+                    />
+                ${data.name} ${data.surname}</label>
+            </div>
         `;
 
-        filterPrioritiesContainer.insertAdjacentHTML("afterbegin", html);
+        filterEmployeesContainer.insertAdjacentHTML("afterbegin", html);
     });
 
-  };
-  renderFiltersPriorities();
+};
+renderFilterEmployees();
 //////////////////////////////////////////////////
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -101,7 +110,7 @@ const prioritiesSelector= document.querySelector(".selector-priority");
 const employeesSelector= document.querySelector(".selector-employee");  
 let chosenDepartment = [];
 let chosenPriorities = [];
-let chosenEmployee =[];
+let selectedEmployee;
 /*
 const getUserInputDepartment = function(e) {
     const clicked = e.target.closest(".user-input");
@@ -135,43 +144,35 @@ filtersBox.addEventListener("click", function(e) {
 const getUserInput = function(e) {
     const clicked = e.target.closest(".user-input");
     if(!clicked) return;
+
+    console.log(clicked);
     const chosen = clicked.value;
     this.push(chosen);
     
 };
+const makeOneSelection = function(e) {
+    let employee;
+    const clicked = e.target;
+    if(clicked.type !== "checkbox") return true;
+    const allEmployee = document.querySelectorAll(".employee");
+    let length = allEmployee.length;
 
- //class="employee"
- const allEmployee = document.querySelectorAll(".employee");
-const makeOneSelection = function() {
-
-    let selection = 0;
-
-    allEmployee.forEach(employee => {
-       if(employee.checked == true) {
-        selection += 1;
+    while(length--) {
+       if(allEmployee[length].type && allEmployee[length].type == "checkbox" && allEmployee[length].id !== clicked.id){
+        allEmployee[length].checked = false;
        }
-    });
-    if(selection > 1){
-        console.log(2222);
-        return false;
+       if(allEmployee[length].id !== clicked.id){
+        employee = clicked.value;
+       }
     }
-    console.log(selection);
+    selectedEmployee = employee;
+
+};
+ filterEmployeesContainer.addEventListener("click",makeOneSelection);
 
 
-}
-//console.log(makeOneSelection());
-
-allEmployee.forEach(employee => {
-    employee.addEventListener("click", function() {
-        return makeOneSelection();
-    })
-})
-
-//////////////////////////////////////
-//employeesSelector.addEventListener("click", makeOneSelection);
 departmentsSelector. addEventListener("click", getUserInput.bind(chosenDepartment));
 prioritiesSelector.addEventListener("click", getUserInput.bind(chosenPriorities));
-//employeesSelector.addEventListener("click", getUserInput.bind(chosenEmployee));
 ///
 ///
 ////
@@ -201,21 +202,16 @@ const renderUserInputsBtns = function(e) {
     </div>`
   );
   if (html) btnClear.classList.remove("hidden");
-  
 
-  /*
-  html +=  chosenEmployee.map(
-    (priority) => `
+  
+  html += `
     <div class="filtered-item">
-        <p>${priority}</p>
+        <p>${selectedEmployee}</p>
         <ion-icon  class="close-icon" name="close-outline"></ion-icon>
-    </div>`
-  );
-  if (html) btnClear.classList.remove("hidden");*/
+    </div>`;
+  if (html) btnClear.classList.remove("hidden");
 
-  
   selectionsContainer.innerHTML = html;
-
 }
 
 filtersBox.addEventListener("click",  renderUserInputsBtns);
@@ -235,80 +231,9 @@ filtersBox.addEventListener("click", function(e) {
 const sss = [departmentSelector, prioritySelector, departmentEmployee].forEach(el =>  {
     el.addEventListener("click", getUserInput);
 });*/
-///////////////////////////////////////////
-///////////////////////////////////////////
-//////////////////////////////////////////
-
-const prioritiesContainer = document.querySelector(".priorities-continer");
-const renderPriorities = async function () {
-    prioritiesContainer.innerHTML = "";
-    const res = await fetch(
-      "https://momentum.redberryinternship.ge/api/priorities"
-    );
-    const datas = await res.json();
-    console.log(datas);
-  
-    datas.map(data => {
-        const html = `
-        <option><img src="https://momentum.redberryinternship.ge/storage/priority-icons/Low.svg"/>nnn </option>
-        <option value="${data.name}" style="background-image:url(${data.icon})";>${data.name}</option>
-        <option style="background-image:url(${data.icon});">male</option>
-        `;
-
-        prioritiesContainer.insertAdjacentHTML("afterbegin", html);
-    });
-
-  };
-  renderPriorities();
   ////////////////////////////////////////////
   ///////////////////////////////////////////
   ///////////////////////////////////////////
-
-  const statusesContainer = document.querySelector(".statuses-container");
-  
-  const renderStatuses = async function () {
-    statusesContainer.innerHTML = "";
-    const res = await fetch(
-      "https://momentum.redberryinternship.ge/api/statuses"
-    );
-    const datas = await res.json();
-    console.log(datas);
-  
-    datas.map(data => {
-        const html = `
-        <option value="${data.name}">${data.name}</option>
-        `;
-
-        statusesContainer.insertAdjacentHTML("afterbegin", html);
-    });
-  };
-  renderStatuses();
-  ////////////////////////////////////////////
-  ///////////////////////////////////////////
-  ///////////////////////////////////////////
-
- /*
-  const departmentsContainer = document.querySelector(".department-container");
-  
-  const renderDepartments = async function () {
-    departmentsContainer .innerHTML = "";
-    const res = await fetch(
-      "https://momentum.redberryinternship.ge/api/departments"
-    );
-    const datas = await res.json();
-    console.log(datas);
-    departments = datas;
-  
-    datas.map(data => {
-        const html = `
-        <option value="${data.name}">${data.name}</option>
-        `;
-
-        departmentsContainer .insertAdjacentHTML("afterbegin", html);
-    });
-  };
-  renderDepartments();
-*/
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////

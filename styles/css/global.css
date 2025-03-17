@@ -385,58 +385,6 @@ header .header-container nav ul li a:visited:last-child:hover {
   gap: 0.5rem;
 }
 
-.test {
-  padding: 5rem;
-}
-.test .create-task-container {
-  max-width: 120rem;
-  padding: 0 3.2rem;
-  margin: 0 auto;
-  background-color: #fff;
-}
-.test .create-task-container form {
-  max-width: 100%;
-  height: 50rem;
-  background-color: #FBF9FF;
-  padding: 1rem 3rem;
-}
-.test .create-task-container form .grids-container {
-  display: flex;
-  flex-direction: column;
-  gap: 5rem;
-}
-.test .create-task-container form .grids-container .grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-}
-.test .create-task-container form .grids-container .grid-container label {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-.test .create-task-container form .grids-container .grid-container input,
-.test .create-task-container form .grids-container .grid-container select {
-  width: 100%;
-  padding: 1rem;
-  border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
-  border-radius: 9px;
-}
-.test .create-task-container form .grids-container .grid-container textarea {
-  width: 100%;
-  border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
-  border-radius: 9px;
-  padding: 2rem;
-  resize: none;
-}
-.test .create-task-container form .grids-container .grid-container .priority-status-container {
-  display: flex;
-}
-.test .create-task-container form .grids-container .grid-container .priority-status-container div {
-  width: 100%;
-}
-
 .overlay {
   position: fixed;
   top: 0;
@@ -586,4 +534,56 @@ html {
   background-color: #8338EC;
   color: #fff;
   align-self: flex-end;
+}
+
+.test {
+  padding: 5rem;
+}
+.test .create-task-container {
+  max-width: 120rem;
+  padding: 0 3.2rem;
+  margin: 0 auto;
+  background-color: #fff;
+}
+.test .create-task-container form {
+  max-width: 100%;
+  height: 50rem;
+  background-color: #FBF9FF;
+  padding: 1rem 3rem;
+}
+.test .create-task-container form .grids-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+.test .create-task-container form .grids-container .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+.test .create-task-container form .grids-container .grid-container label {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.test .create-task-container form .grids-container .grid-container input,
+.test .create-task-container form .grids-container .grid-container select {
+  width: 100%;
+  padding: 1rem;
+  border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
+  border-radius: 9px;
+}
+.test .create-task-container form .grids-container .grid-container textarea {
+  width: 100%;
+  border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
+  border-radius: 9px;
+  padding: 2rem;
+  resize: none;
+}
+.test .create-task-container form .grids-container .grid-container .priority-status-container {
+  display: flex;
+}
+.test .create-task-container form .grids-container .grid-container .priority-status-container div {
+  width: 100%;
 }/*# sourceMappingURL=global.css.map */

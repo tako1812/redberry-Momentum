@@ -1,5 +1,4 @@
 "use strict";
-
 const inputTitle = document.querySelector(".input-title");
 const taskDescription = document.querySelector(".task-description");
 const titleValidationText = document.querySelector(".title-validation-text");

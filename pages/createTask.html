@@ -102,22 +102,30 @@
 
               <div class="grid-container">
                 <div class="priority-status-container">
-                  <div>
-                    <label for="select-priority">პრიორიტეტი*</label>
-                    <select
-                      class="priorities-continer"
-                      name="priority"
-                      id="select-priority4"
-                    >
-                      <option class="image"value="111"style="background-image:url(./assets/images/Medium.png)"; ></option>
-                    
-                      <option value="დაბალი">დაბალი</option>
+                  <div class="dropdown-container">
+                    <label>პრიორიტეტი*</label>
+                    <div class="dropdown">
+                      <button class="btn dropdown-btn">
+                        <div class="default">
+                          <img class="icon-selected"src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
+                          <p class="category-selected">დაბალი</p>
+                        </div>
+                      </button>
                       
-                      <option style="background-image:url();">male</option>
-                      
-                    </select>
-    
+                      <div class="dropdown-content hidden">
+                        <a class="img-icon-container">
+                          <img id="dropdown-icon" src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
+                          <p class="category">დაბალი</p>
+                        </a>
+                        <a class="img-icon-container" id="container">
+                          <img id="dropdown-icon" src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132500/bflag.jpg" alt="priority icon"/>
+                          <p class="category">საშუალო</p>
+                        </a>
+                      </div>
+                    </div>
                   </div>
+
+
                   <div>
                     <label for="select-status">სტატუსი*</label>
                     <select

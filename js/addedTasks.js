@@ -1,4 +1,4 @@
-
+"use strict";
 const filtersBox = document.querySelector(".filters-box");
 const btnClear = document.querySelector(".btn-clear");
 let departments =[];
@@ -53,7 +53,7 @@ const renderFilterDepartment = async function () {
                 type="checkbox"
                 id="department1"
                 name="department1"
-                value="${data.id}"
+                value="${data.name}"
                 />
             ${data.name}</label>
         </div>
@@ -62,6 +62,43 @@ const renderFilterDepartment = async function () {
     });
   };
   renderFilterDepartment();
+///////////////////////////////////////////
+//////////////////////////////////////////
+
+const filterPrioritiesContainer = document.querySelector(".fiter-priorities-container");
+const renderFilterPriorities = async function () {
+    filterPrioritiesContainer.innerHTML = "";
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/priorities"
+    );
+    const datas = await res.json();
+    console.log(datas);
+  
+    datas.map(data => {
+        let html = `
+        <div class="input-label-container">
+            <input
+            class="user-input"
+            type="checkbox"
+            id="department1"
+            name="department1"
+            value="${data.name}"
+            />
+            <label for="department1">${data.name}</label>
+        </div>
+        `;
+        filterPrioritiesContainer.insertAdjacentHTML("afterbegin", html);
+    });
+  };
+  renderFilterPriorities();
+
+
+
+
+
+
+
+
 //////////////////////////////////////////
 /////////////////////////////////////////
 ///
@@ -111,46 +148,15 @@ const employeesSelector= document.querySelector(".selector-employee");
 let chosenDepartment = [];
 let chosenPriorities = [];
 let selectedEmployee;
-/*
-const getUserInputDepartment = function(e) {
-    const clicked = e.target.closest(".user-input");
-    if(!clicked) return;
-    const chosen = clicked.value;
-    chosenDepartment.push(chosen);
-    console.log(chosenDepartment);
-}
-*/
-
-/*
-const sss = document.querySelector(".btn-choose");
-departmentSelector. addEventListener("click", function(e) {
-    const clicked = e.target.closest(".user-input");
-    if(!clicked) return;
-    const chosen = clicked.value;
-    chosenDepartment.push(chosen);
-    
-});
-
-filtersBox.addEventListener("click", function(e) {
-    const clicked = e.target.closest(".btn-choose");
-    if(!clicked) return;
-    
-    console.log(chosenDepartment);
-    
-});*/
-//////////////////////////////////////////////////
-///
 
 const getUserInput = function(e) {
     const clicked = e.target.closest(".user-input");
     if(!clicked) return;
-
-    console.log(clicked);
     const chosen = clicked.value;
     this.push(chosen);
     
 };
-const makeOneSelection = function(e) {
+const makeSingleSelection = function(e) {
     let employee;
     const clicked = e.target;
     if(clicked.type !== "checkbox") return true;
@@ -166,74 +172,53 @@ const makeOneSelection = function(e) {
        }
     }
     selectedEmployee = employee;
-
 };
- filterEmployeesContainer.addEventListener("click",makeOneSelection);
-
-
+filterEmployeesContainer.addEventListener("click",makeSingleSelection);
 departmentsSelector. addEventListener("click", getUserInput.bind(chosenDepartment));
 prioritiesSelector.addEventListener("click", getUserInput.bind(chosenPriorities));
-///
-///
-////
+
 ///////////////////////////////////////
 //////////////////////////////////////
 ///
 const selectionsContainer = document.querySelector(".selections-container");
 selectionsContainer.innerHTML = "";
 const renderUserInputsBtns = function(e) {
+    let html;
     const clicked = e.target.closest(".btn-choose");
     if(!clicked) return;
 
-  let html = chosenDepartment.map(
-    (department) => `
-    <div class="filtered-item">
-        <p>${department}</p>
-        <ion-icon  class="close-icon" name="close-outline"></ion-icon>
-    </div>`
-  );
-  if (html) btnClear.classList.remove("hidden");
+  if(chosenDepartment.length >= 1) {
+    html = chosenDepartment.map((department) => 
+         `<div class="filtered-item">
+            <p>${department}</p>
+            <ion-icon  class="close-icon" name="close-outline"></ion-icon>
+        </div>`
+    );
+      if (html) btnClear.classList.remove("hidden");
+  }
 
-  html +=  chosenPriorities.map(
-    (priority) => `
-    <div class="filtered-item">
-        <p>${priority}</p>
-        <ion-icon  class="close-icon" name="close-outline"></ion-icon>
-    </div>`
-  );
-  if (html) btnClear.classList.remove("hidden");
-
+  if(chosenPriorities.length >= 1) {
+      html =  chosenPriorities.map(
+        (priority) => `
+        <div class="filtered-item">
+            <p>${priority}</p>
+            <ion-icon  class="close-icon" name="close-outline"></ion-icon>
+        </div>`
+      );
+      if (html) btnClear.classList.remove("hidden");
+  }
   
-  html += `
+  if(selectedEmployee) {
+    html = `
     <div class="filtered-item">
         <p>${selectedEmployee}</p>
         <ion-icon  class="close-icon" name="close-outline"></ion-icon>
     </div>`;
-  if (html) btnClear.classList.remove("hidden");
-
+    if (html) btnClear.classList.remove("hidden");
+}
   selectionsContainer.innerHTML = html;
 }
-
 filtersBox.addEventListener("click",  renderUserInputsBtns);
-/*
-filtersBox.addEventListener("click", function(e) {
-    const clicked = e.target.closest(".btn-choose");
-    if(!clicked) return;
-    
-    
-    console.log(chosenDepartment);
-    console.log(chosenEmployee);
-    console.log(chosenPriority);
-    
-});
-**/
-/*
-const sss = [departmentSelector, prioritySelector, departmentEmployee].forEach(el =>  {
-    el.addEventListener("click", getUserInput);
-});*/
-  ////////////////////////////////////////////
-  ///////////////////////////////////////////
-  ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////

@@ -1,3 +1,4 @@
+"use strict";
 const prioritiesContainer = document.querySelector(".priorities-continer");
 const renderPriorities = async function () {
     prioritiesContainer.innerHTML = "";
@@ -62,3 +63,29 @@ const statusesContainer = document.querySelector(".statuses-container");
   };
   renderDepartments();
 */
+////////////////////////////////
+///////////////////////////////
+//////////////////////////////
+// customize dropdown functionality
+///
+
+const dropdownBtn = document.querySelector(".dropdown-btn");
+const dropdownContent = document.querySelector(".dropdown-content");
+const iconSelected = document.querySelector(".icon-selected");
+const categorySelected = document.querySelector(".category-selected");
+dropdownBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+  dropdownContent.classList.toggle("hidden");
+});
+
+const dropdownBtnFunctionality = function(e) {
+  const clicked = e.target.closest(this);
+  const icon = clicked.querySelector("img");
+  const iconSource = icon.getAttribute("src");
+  
+  categorySelected.textContent = clicked.textContent;
+  iconSelected.setAttribute("src", iconSource);
+  dropdownContent.classList.add("hidden");
+
+}
+dropdownContent.addEventListener("click", dropdownBtnFunctionality.bind(".img-icon-container"));

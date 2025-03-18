@@ -57,6 +57,7 @@
         }
     }
 }
+
 .dropdown-container{
     display:flex;
     flex-direction: column;
@@ -70,6 +71,9 @@
         padding: 1rem 0;
         border: 2.5px solid #808a9370;
         border-radius: 9px;
+        }
+        &-btn-employee{
+            width:100%;
         }
         &-content {
             position: absolute;
@@ -100,6 +104,11 @@
             }
 
         }
+        .dropdown-content-employees{
+            width:100%;
+            height:18rem;
+
+        }
 
     
         .default{
@@ -119,3 +128,4 @@
     
     }
 }
+

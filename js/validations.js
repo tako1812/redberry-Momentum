@@ -11,126 +11,92 @@ const surnameValidationText = document.querySelector(".surname-validation-text")
 
 
 
-const checkMinSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
-//const checkMaxSymbols = (input) => input.trim().length <= 255;
-const checkData = (input) => input.split("/").length < 3;
+const checkSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
+//const checkData = (input) => input.split(" ").length < 4;
 
 
 const dataInput = document.querySelector(".data-input");
+let deadlineData;
 
-
-const checkDataValidation = function() {
-    
-    const [year, data, month] = (dataInput.value).split("-");
-    console.log(year,data, month);
-    let datas= dataInput.value; 
-
-
-      
-    /*
-     if(checkData(datas)) {
-         data.style.color = "red"
-    }*/
-
-
+const config = {
+    dateFormat: "d.m.Y",
+    minDate: new Date().fp_incr(1)
+}
+flatpickr(".data-input", config);
+/*
+const sss = function(selectedDates, dateStr, instance) {
+    console.log(dateStr);      
+} */
+//dataInput.addEventListener("change", sss);
+/*const checkDataValidation = function() {
+    deadlineData = dataInput.value;
+    console.log(deadlineData);
 
 }
-dataInput.addEventListener("input", checkDataValidation);
+dataInput.addEventListener("change", checkDataValidation);*/
 
 
-
-
-
-/*
-const checkSymbolsValidation = function() {
-    
-    let description = taskDescription.value;
-    //const title = e.target.value;
-    let title = inputTitle.value;
-    console.log(title);
-    
-    console.log(title);
-    console.log(checkMinSymbols(title));
-
-
-    if(!checkMinSymbols(title)) {
-        titleValidationText.classList.add("invalid");
-
-    } 
-
-    if(checkMinSymbols(title)){ 
-        //titleValidationText.classList.add("valid");
-        titleValidationText.style.color = "green";
-    }
-
-    
-    if(!checkMinSymbols(description)) {
-        descriptionValidationText .classList.add("invalid");
-
-    } 
-    if(checkMinSymbols(description)){ 
-        descriptionValidationText.style.color = "green";
-    }
-    
-}*/
-/////////////////////////////////////////
-////////////////////////////////////////
 const checkNameValidation = function() {
-    
+    let result = true;
     let nameValue = inputName.value;
 
-
-    if(checkMinSymbols(nameValue)){ 
-        nameValidationText.classList.remove("invalid");
+    if(checkSymbols(nameValue)){ 
         nameValidationText.classList.add("valid");
+        nameValidationText.classList.remove("invalid");
         //nameValidationText.style.color = "green";
     }
-
-    if(!checkMinSymbols(nameValue)) {
+    if(!checkSymbols(nameValue)) {
         nameValidationText.classList.add("invalid");
+        result = false;
     } 
-    
+    return result;
 }
 
+
 const checkSurnameValidation = function() {
-    
+    let result = true;
     let surnameValue = inputSurname.value;
 
-    if(!checkMinSymbols(surnameValue)) {
-        surnameValidationText.classList.add("invalid");
-    } 
-    if(checkMinSymbols(surnameValue)){ 
-        //titleValidationText.classList.add("valid");
-        surnameValidationText.style.color = "green";
+    if(checkSymbols(surnameValue)){ 
+        surnameValidationText.classList.add("valid");
+        surnameValidationText.classList.remove("invalid");
     }
+    if(!checkSymbols(surnameValue)) {
+        surnameValidationText.classList.add("invalid");
+        result = false;
+    } 
+    return result;
 }
 
 const checkTitleValidation = function() {
-    
-    //const title = e.target.value;
+    let result = true;
     let title = inputTitle.value;
 
-
-    if(!checkMinSymbols(title)) {
+    if(checkSymbols(title)){ 
+        titleValidationText.classList.add("valid");
+        titleValidationText.classList.remove("invalid");
+    }
+    if(!checkSymbols(title)) {
         titleValidationText.classList.add("invalid");
+        result = false;
     } 
-    if(checkMinSymbols(title)){ 
-        //titleValidationText.classList.add("valid");
-        titleValidationText.style.color = "green";
-    }
+    return result;
 }
+
 const checkDescriptionValidation = function() {
-    
+    let result = true;
     let description = taskDescription.value;
-
-    if(!checkMinSymbols(description)) {
-        descriptionValidationText .classList.add("invalid");
-    } 
-    if(checkMinSymbols(description)){ 
-        descriptionValidationText.style.color = "green";
+    if(checkSymbols(description)){ 
+        descriptionValidationText.classList.add("valid");
+        descriptionValidationText.classList.remove("invalid");
     }
-}
 
+    if(!checkSymbols(description)) {
+        descriptionValidationText .classList.add("invalid");
+        result = false;
+    } 
+    return result;
+}
 inputTitle.addEventListener("input", checkTitleValidation);
 taskDescription.addEventListener("input", checkDescriptionValidation);
 inputName.addEventListener("input", checkNameValidation);

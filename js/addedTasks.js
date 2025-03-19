@@ -129,6 +129,7 @@ const renderFilterEmployees = async function () {
                     name="department1"
                     value="${data.name} ${data.surname}"
                     />
+                    <img class="employee-img" src="${data.avatar}">
                 ${data.name} ${data.surname}</label>
             </div>
         `;
@@ -145,8 +146,8 @@ renderFilterEmployees();
 const departmentsSelector= document.querySelector(".selector-department"); 
 const prioritiesSelector= document.querySelector(".selector-priority");
 const employeesSelector= document.querySelector(".selector-employee");  
-let chosenDepartment = [];
-let chosenPriorities = [];
+let selectedDepartments = [];
+let selectedPriorities = [];
 let selectedEmployee;
 
 const getUserInput = function(e) {
@@ -174,8 +175,8 @@ const makeSingleSelection = function(e) {
     selectedEmployee = employee;
 };
 filterEmployeesContainer.addEventListener("click",makeSingleSelection);
-departmentsSelector. addEventListener("click", getUserInput.bind(chosenDepartment));
-prioritiesSelector.addEventListener("click", getUserInput.bind(chosenPriorities));
+departmentsSelector. addEventListener("click", getUserInput.bind(selectedDepartments));
+prioritiesSelector.addEventListener("click", getUserInput.bind(selectedPriorities));
 
 ///////////////////////////////////////
 //////////////////////////////////////
@@ -183,12 +184,13 @@ prioritiesSelector.addEventListener("click", getUserInput.bind(chosenPriorities)
 const selectionsContainer = document.querySelector(".selections-container");
 selectionsContainer.innerHTML = "";
 const renderUserInputsBtns = function(e) {
-    let html;
     const clicked = e.target.closest(".btn-choose");
     if(!clicked) return;
+    let html;
 
-  if(chosenDepartment.length >= 1) {
-    html = chosenDepartment.map((department) => 
+  if(selectedDepartments.length >= 1) {
+    selectedDepartments.map((department) => 
+        html =
          `<div class="filtered-item">
             <p>${department}</p>
             <ion-icon  class="close-icon" name="close-outline"></ion-icon>
@@ -197,9 +199,9 @@ const renderUserInputsBtns = function(e) {
       if (html) btnClear.classList.remove("hidden");
   }
 
-  if(chosenPriorities.length >= 1) {
-      html =  chosenPriorities.map(
-        (priority) => `
+  if(selectedPriorities.length >= 1) {
+      selectedPriorities.map((priority) => 
+        html +=`
         <div class="filtered-item">
             <p>${priority}</p>
             <ion-icon  class="close-icon" name="close-outline"></ion-icon>
@@ -209,7 +211,7 @@ const renderUserInputsBtns = function(e) {
   }
   
   if(selectedEmployee) {
-    html = `
+    html += `
     <div class="filtered-item">
         <p>${selectedEmployee}</p>
         <ion-icon  class="close-icon" name="close-outline"></ion-icon>
@@ -224,6 +226,7 @@ filtersBox.addEventListener("click",  renderUserInputsBtns);
 /////////////////////////////////////////////////////////////
 /// ADD EMPLOYEE
 // preview image
+/*
 const inputFile = document.querySelector(".image-upload");
 const previewConatiner = document.querySelector(".image-preview-container");
 const imagePreview = document.querySelector(".image-preview--image");
@@ -307,6 +310,7 @@ const departmentsContainer = document.querySelector(".departments-container");
     }
   };
 
+  
   const uploadData = async function(e) {
     e.preventDefault();
 
@@ -332,5 +336,86 @@ const departmentsContainer = document.querySelector(".departments-container");
     const datas = await sendJson("https://momentum.redberryinternship.ge/api/employees",formData);
     console.log(datas);
   };
-  addEmployeeFormContainer.addEventListener("submit",uploadData);
+  addEmployeeFormContainer.addEventListener("submit",uploadData);*/
 
+  /////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////
+  //GET CARDS DATA
+  //
+  const statusGoingToStartContainer = document.querySelector(".status-goingToStart");
+  const statusReadyForTestingContainer =document.querySelector(".status-inProgress");
+  const statusInProgressContainer = document.querySelector(".status-readyForTesting");
+  const statusFinishedContainer = document.querySelector(".status-finished");
+
+
+
+  let tasksData;
+  const renerTaskCards = async function () {
+    
+  
+    const res = await fetch(
+      "https://momentum.redberryinternship.ge/api/tasks",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          accept: "application/json",
+        },
+      }
+    );
+    const datas = await res.json();
+    tasksData = datas;
+    
+    /*const statusGoingToStartContainer = datas.filter(data => data.status === "დასაწყები");
+    const statusReadyForTestingContainer = datas.filter(data => data.status === "მზად ტესტირებისთვის");
+    const statusInProgressContainer = datas.filter(data => data.status === "პროგრესში");
+    const statusFinishedContainer = datas.filter(data => data.status === "დასრულებული");*/
+
+    datas.map(data =>{
+        const html = `
+        <div class="task-card">
+            <div class="task-card-categories">
+                <div>
+                <div class="task-category">
+                    <img src="./assets/images/Medium.png"/>
+                    <p>საშუალო</p>
+                </div>
+                <div class="department">დიზიანი</div>
+                </div>
+                <p>22 იანვ, 2022</p>
+            </div>
+            <div class="task-card-description">
+                <h3>redberry-ს საიტის ლისტინგის დიზიანი</h3>
+                <p>შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
+                სექციებს და ნავიგაციას
+                </p>
+            </div>
+            <div class="task-card-employee">
+                <img src="./assets/images/customer-1.jpg"/>
+                <div>
+                <img src="./assets/images/Comments.png"/>
+                <p>8</p>
+                </div>
+            </div>
+        </div>
+        `;
+        if(data.status === "დასაწყები"){
+            statusGoingToStartContainer.innerHTML = html;
+        }
+        if(data.status === "პროგრესში"){
+            statusReadyForTestingContainer.innerHTML = html;
+        }
+        if(data.status === "მზად ტესტრირებისთვის"){
+            statusInProgressContainer.innerHTML = html;
+        }
+        if(data.status === "დასრულებული"){
+            statusFinishedContainer.innerHTML = html;
+        }
+
+    });
+};
+//////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+// FILTER FUNCTIONALITY
+//

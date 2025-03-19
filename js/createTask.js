@@ -2,6 +2,9 @@
 const token = "9e73c158-43ef-4fd6-9f0e-70385f360191";
 const prioritiesContainer = document.querySelector(".dropdown-priorities");
 const ddd= document.querySelector(".default");
+
+const employeeLabel = document.querySelector(".employee-label");
+
 const renderPriorities = async function () {
     prioritiesContainer.innerHTML = "";
     const res = await fetch(
@@ -12,7 +15,7 @@ const renderPriorities = async function () {
   
     datas.map(data => {
         const html = `
-        <a class="img-icon-container">
+        <a class="img-icon-container" data-set="${data.id}">
           <img id="dropdown-icon" src="${data.icon}" alt="priority icon"/>
           <p class="category">${data.name}</p>
         </a>
@@ -21,17 +24,13 @@ const renderPriorities = async function () {
         prioritiesContainer.insertAdjacentHTML("afterbegin", html);
     });
     
-    /*const [defaultValue] = datas.filter((data) => data.name === "საშუალო"); 
+    const [defaultValue] = datas.filter((data) => data.name === "საშუალო"); 
     console.log(defaultValue);
+     const imgSource =defaultValue.icon;
+     const category = defaultValue.name;
+     iconSelected.setAttribute("src", imgSource);
+     categorySelected.textContent = category;     
 
-    ddd.innerHTML = "";
-    const markup = ` 
-        <img class="icon-selected"src="${defaultValue.icon}" alt="priority icon"/>
-        <p class="category-selected">${defaultValue.name}</p>
-       `;
-      
-    ddd.insertAdjacentHTML("afterbegin", markup);*/
-  
   };
   renderPriorities();
   
@@ -49,7 +48,7 @@ const statusesContainer = document.querySelector(".statuses-container");
   
     datas.map(data => {
         const html = `
-        <option value="${data.name}">${data.name}</option>
+        <option value="${data.id}">${data.name}</option>
         `;
 
         statusesContainer.insertAdjacentHTML("afterbegin", html);
@@ -97,27 +96,55 @@ const statusesContainer = document.querySelector(".statuses-container");
 
   };
   renderDepartment();
-
-
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
+ 
   const selectedDepartment = document.querySelector(".departments-dropdown");
-  selectedDepartment.addEventListener("change", function(e) {
-    
+  let btnEmployeeHasLisener = false;
 
+  selectedDepartment.addEventListener("change", function(e) {
+    employeeLabel.classList.remove("disable");
+
+    if(!btnEmployeeHasLisener) {
+      dropdownBtnEmployee.addEventListener("click", function(e) {
+        e.preventDefault();
+        dropdownContentEmployees.classList.toggle("hidden");
+      });
+      btnEmployeeHasLisener = true;
+    }
+     
+    
     const departmentEmployee = dataEmployees.filter(employee => {
-      console.log(employee);
       return employee.department.id === +selectedDepartment.value;
 
     });
+
     dropdownContentEmployees.innerHTML = "";
     departmentEmployee.map(employee => {
       const html = `
-        <a class="employee-info-container">
+        <a class="employee-info-container" data-set="${employee.id}">
           <img src="${employee.avatar}" alt="priority icon"/>
           <p class="category">${employee.name} ${employee.surname}</p>
         </a>
-      `
+      ` 
+      
       dropdownContentEmployees.insertAdjacentHTML("afterbegin", html);
     });
+    /*
+    dropdownBtnEmployee.innerHTML = "";
+    const markup = 
+    `<div class="default">
+        <img class="info-employee-img"src="${departmentEmployee[0].avatar}" alt="priority icon"/>
+        <p class="info-employee-fullName">${departmentEmployee[0].name} ${departmentEmployee[0].surname}</p>
+     </div>
+    `;
+    dropdownBtnEmployee.insertAdjacentHTML("afterbegin", markup);*/
+
+
+
+
 
   })
 ////////////////////////////////
@@ -163,36 +190,42 @@ const employeeFullname = document.querySelector(".info-employee-fullName");
 /////////////////////////////////////////
 // customize dropdown functionality
 ///
-
-const dropdownBtn = document.querySelector(".dropdown-btn-prior");
+const dropdownBtnPriority = document.querySelector(".dropdown-btn-prior");
 const dropdownContentPriorities = document.querySelector(".dropdown-content-priorities");
 const iconSelected = document.querySelector(".icon-selected-prior");
 const categorySelected = document.querySelector(".category-selected-prior");
-dropdownBtn.addEventListener("click", function(e) {
+dropdownBtnPriority.addEventListener("click", function(e) {
   e.preventDefault();
   dropdownContentPriorities.classList.toggle("hidden");
 });
 
+
+let priorityIdData;
+let employeeIdData;
+
 const dropdownBtnFunctionality = function(e) {
   const clicked = e.target.closest(this);
-  console.log(clicked);
+  const id = clicked.getAttribute("data-set");
   const icon = clicked.querySelector("img");
   const iconSource = icon.getAttribute("src");
   
   if(clicked.classList.contains("img-icon-container")){
     categorySelected.textContent = clicked.textContent;
     iconSelected.setAttribute("src", iconSource);
+    priorityIdData = id;
     dropdownContentPriorities.classList.add("hidden");
   }
   if(clicked.classList.contains("employee-info-container")){
     employeeFullname.textContent = clicked.textContent;
     employeeImage.setAttribute("src", iconSource);
+    employeeImage.classList.remove("remove");
+    employeeIdData = id;
+
+    //const [nname, surname] = employeeFullnameData.split(" ");
     dropdownContentEmployees.classList.add("hidden");
   }
 
 } 
-
-
 dropdownContentPriorities.addEventListener("click", dropdownBtnFunctionality.bind(".img-icon-container"));
 dropdownContentEmployees.addEventListener("click", dropdownBtnFunctionality.bind(".employee-info-container"));
 
@@ -206,10 +239,74 @@ const dropdownBtnEmployee = document.querySelector(".dropdown-btn-employee");
 const iconEmployee = document.querySelector(".icon-selected-emoloyee");
 const categoryEmployee = document.querySelector(".category-selected-employee");
 const employeeInfoContainer = document.querySelector(".employee-info-container");
-
-
 //employees-container
-dropdownBtnEmployee.addEventListener("click", function(e) {
+/*dropdownBtnEmployee.addEventListener("click", function(e) {
   e.preventDefault();
   dropdownContentEmployees.classList.toggle("hidden");
-});
+});*/
+///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+// POST REQUEST ON TASKS
+//
+const formCreateTask = document.querySelector(".form-create-task");
+const inputDataValue = document.querySelector(".data-input");
+
+
+const sendJson = async function(url, uploadData) {
+    try{
+        const fetchData = await fetch(url,{
+            method:"POST",
+            headers:{
+                Authorization: `Bearer ${token}`,
+                accept:"application/json",
+            },
+            body: uploadData,
+        }
+    );
+    const data = await fetchData.json();
+    return data;
+    }catch (err){
+        throw err;
+    }
+  };
+
+  const uploadData = async function(e) {
+    e.preventDefault();
+
+    const validTitle = checkTitleValidation();
+    const validDescription = checkDescriptionValidation();
+    
+    if(!validTitle && !validDescription) return;
+
+    const dataArr = [...new FormData(formCreateTask)];
+    const data = Object.fromEntries(dataArr);
+    console.log(data);
+    
+    console.log(inputDataValue.value);
+    console.log(data.title);
+    /*const taskData = {
+        name: data.name,
+        surname: data.surname, 
+        avatar:data.avatar, 
+        department_id: data.department
+    };*/
+
+    const formData = new FormData();
+
+    formData.append("name", data.title);
+    formData.append("description", data.description);
+    formData.append("due_date", inputDataValue.value);
+    formData.append("status_id", +data.status);
+  
+    formData.append("priority_id", +priorityIdData);
+    formData.append("employee_id", +employeeIdData);
+    
+    
+    console.log(formData);
+    const datas = await sendJson("https://momentum.redberryinternship.ge/api/tasks",formData);
+    console.log(datas);
+  };
+  formCreateTask.addEventListener("submit",uploadData);
+
+

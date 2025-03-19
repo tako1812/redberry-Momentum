@@ -225,6 +225,7 @@ header .header-container nav ul li a:visited:last-child:hover {
   background-color: #fff;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   padding: 2rem;
+  z-index: 10000;
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -254,6 +255,11 @@ header .header-container nav ul li a:visited:last-child:hover {
 }
 .section-filters .filters-container .filters-box .multiple-selector-container .btn-choose {
   align-self: self-end;
+}
+.section-filters .filters-container .filters-box .multiple-selector-container .employee-img {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 9px;
 }
 .section-filters .filters-container .filters-box .arrow-icon {
   width: 1.7rem;
@@ -567,14 +573,14 @@ html {
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-.test .create-task-container form .grids-container .grid-container input,
-.test .create-task-container form .grids-container .grid-container select {
+.test .create-task-container form .grids-container .grid-container .input,
+.test .create-task-container form .grids-container .grid-container .select {
   width: 100%;
   padding: 1rem;
   border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
   border-radius: 9px;
 }
-.test .create-task-container form .grids-container .grid-container textarea {
+.test .create-task-container form .grids-container .grid-container .textarea {
   width: 100%;
   border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
   border-radius: 9px;
@@ -590,10 +596,16 @@ html {
 .test .create-task-container form .grids-container .grid-container .priority-status-container div {
   width: 100%;
 }
+.test .create-task-container form .grids-container .btn-createTask-box {
+  align-self: flex-end;
+}
 
 .dropdown-container {
   display: flex;
   flex-direction: column;
+}
+.dropdown-container .disable {
+  color: #ADB5BD;
 }
 .dropdown-container .dropdown {
   position: relative;
@@ -647,4 +659,8 @@ html {
 }
 .dropdown-container .dropdown .default p {
   font-size: 1.2rem;
+}
+
+.remove {
+  display: none;
 }/*# sourceMappingURL=global.css.map */

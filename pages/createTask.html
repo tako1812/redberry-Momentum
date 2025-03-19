@@ -7,6 +7,8 @@
     <title>Momentum</title>
 
     <link rel="stylesheet" href="../styles/css/global.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  
   </head>
 
   <body>
@@ -55,7 +57,7 @@
                 <div>
                   <label for="select-department">დეპარტამენტი*</label>
                   <select
-                    class="department-container departments-dropdown"
+                    class="select department-container departments-dropdown"
                     name="department"
                     id="select-department"
                   >
@@ -71,7 +73,7 @@
                   <label for="description">აღწერა </label>
                   <textarea
                     name="description"
-                    class="task-description"
+                    class="textarea task-description"
                     minlength="2"
                     maxlength="255"
                   ></textarea>
@@ -86,12 +88,12 @@
                 </div>
                 <div>
                   <div class="dropdown-container">
-                    <label for="select-employee">პასუხისმგებელი თანამშრომელი*</label>
+                    <label for="select-employee" class="employee-label disable">პასუხისმგებელი თანამშრომელი*</label>
                     <div class="dropdown">
                       <button class="btn dropdown-btn dropdown-btn-employee">
                         <div class="default">
-                          <img class="info-employee-img"src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
-                          <p class="info-employee-fullName">დაბალი</p>
+                          <img class="info-employee-img remove" src="" alt="priority icon"/>
+                          <p class="info-employee-fullName"></p>
                         </div>
                       </button>
                       <div class="dropdown-content dropdown-content-employees hidden">
@@ -115,10 +117,10 @@
                     <label>პრიორიტეტი*</label>
                     <div class="dropdown">
                       <button class="btn dropdown-btn dropdown-btn-prior">
-                        <div class="default">
-                          <img class="icon-selected-prior"src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
-                          <p class="category-selected-prior">დაბალი</p>
-                        </div>
+                          <a class="img-icon-container default">
+                            <img class="icon-selected-prior" src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
+                            <p class="category-selected-prior">დაბალი</p>
+                          </a>
                       </button>
                       <div class="dropdown-content dropdown-content-priorities dropdown-priorities hidden">
                         <a class="img-icon-container">
@@ -137,7 +139,7 @@
                   <div>
                     <label for="select-status">სტატუსი*</label>
                     <select
-                      class="statuses-container"
+                      class="select statuses-container"
                       name="status"
                       id="select-status3"
                     >
@@ -152,9 +154,14 @@
                 </div>
                 <div>
                   <label>დედლაინი</label>
-                    <input class="data-input" type="date"/>
+                    <input class="input data-input" type="datetime-local" placeholder="DD/MM/YYYY"/>
                 </div>
-              </div>      
+              </div>    
+              <div class="btn-createTask-box">
+                <button type="submit" class="btn btn-create btn-create-task">
+                  დავალების შექმნა
+                </button>
+              </div>  
             </div>  
           </form>
         </div>
@@ -166,6 +173,7 @@
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/createTask.js"></script>
     <script src="../js/validations.js"></script>
   </body>

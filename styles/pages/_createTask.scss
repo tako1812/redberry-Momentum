@@ -17,41 +17,46 @@
                 gap:5rem;
 
                 .grid-container{
-                display:grid;
-                grid-template-columns: 1fr 1fr;
-                
-                gap:3rem;
-                label {
-                    display: block;
-                    font-size: 1.2rem;
-                    font-weight: 600;
-                    margin-bottom: 0.5rem;
-                }
-                input,
-                select {
-                    width: 100%;
-                    padding: 1rem;
-                    border: 2.5px solid #808a9370;
-                    border-radius: 9px;
-                }
-                textarea {
-                    width: 100%;
-                    border: 2.5px solid #808a9370;
-                    border-radius: 9px;
-                    padding: 2rem;
-                    resize: none;
-                }
-                .priority-status-container{
-                    display:flex;
-
-                    p{
-                       display: block;
-                    }
+                    display:grid;
+                    grid-template-columns: 1fr 1fr;
                     
-                    div{
-                    width:100%;
+                    gap:3rem;
+                    label {
+                        display: block;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        margin-bottom: 0.5rem;
+                    }
+                    .input,
+                    .select {
+                        width: 100%;
+                        padding: 1rem;
+                        border: 2.5px solid #808a9370;
+                        border-radius: 9px;
+                    }
+                    .textarea {
+                        width: 100%;
+                        border: 2.5px solid #808a9370;
+                        border-radius: 9px;
+                        padding: 2rem;
+                        resize: none;
+                    }
+                    .priority-status-container{
+                        display:flex;
+
+                        p{
+                        display: block;
+                        }
+                        
+                        div{
+                        width:100%;
+                        }
                     }
                 }
+
+                .btn-createTask-box{
+                    align-self: flex-end;
+
                 }
             }
         }
@@ -61,6 +66,10 @@
 .dropdown-container{
     display:flex;
     flex-direction: column;
+
+    .disable{
+        color:#ADB5BD;
+    }
 
     .dropdown{
         position: relative;
@@ -124,8 +133,12 @@
                 font-size:1.2rem;
 
             }
+            
         }
     
     }
+}
+.remove{
+    display:none;
 }
 

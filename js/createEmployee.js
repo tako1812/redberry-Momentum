@@ -49,7 +49,11 @@ const departmentsContainer = document.querySelector(".departments-container");
     const datas = await res.json();
     console.log(datas);
     departments = datas;
-  
+    const html = `
+        <option value=""></option>
+        `;
+        departmentsContainer.insertAdjacentHTML("afterbegin", html);
+
     datas.map(data => {
         const html = `
         <option value="${data.id}">${data.name}</option>
@@ -91,6 +95,13 @@ const departmentsContainer = document.querySelector(".departments-container");
     const dataArr = [...new FormData(addEmployeeFormContainer)];
     const data = Object.fromEntries(dataArr);
     console.log(data);
+
+
+    const validDropdown = checkCreateEmpValidation();
+    
+    if(!validDropdown) return;
+   
+
 
     const employeeData = {
         name: data.name,

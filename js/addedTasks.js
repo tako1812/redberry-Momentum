@@ -186,11 +186,11 @@ selectionsContainer.innerHTML = "";
 const renderUserInputsBtns = function(e) {
     const clicked = e.target.closest(".btn-choose");
     if(!clicked) return;
-    let html;
+    let html = "";
 
   if(selectedDepartments.length >= 1) {
     selectedDepartments.map((department) => 
-        html =
+        html +=
          `<div class="filtered-item">
             <p>${department}</p>
             <ion-icon  class="close-icon" name="close-outline"></ion-icon>
@@ -220,7 +220,7 @@ const renderUserInputsBtns = function(e) {
 }
   selectionsContainer.innerHTML = html;
 
-  filterTasks();
+   filterTasks();
   
 }
 filtersBox.addEventListener("click",  renderUserInputsBtns);
@@ -354,7 +354,6 @@ addEmployeeFormContainer.addEventListener("submit",uploadData);*/
   let tasksData;
 const renderTaskCards = async function () {
     
-
     const res = await fetch(
       "https://momentum.redberryinternship.ge/api/tasks",
       {
@@ -368,6 +367,7 @@ const renderTaskCards = async function () {
     const datas = await res.json();
     console.log(datas);
     tasksData = datas;
+    createCard(tasksData);
 
     /*
     const departments = datas.map(data => {
@@ -383,6 +383,26 @@ const renderTaskCards = async function () {
     
 };
 renderTaskCards();
+/////////////////////////////////////////////
+
+
+const shorten = function(data) {
+  if (data.length > 1) {
+    const datas = data.split(" ");
+    
+    
+    const sliced = datas.map(each => each.slice(0, 3));
+  
+    const shortend = sliced.join(".");
+    return shortend;
+  }else{
+  return false;
+  }
+};
+
+
+
+
 ////////////////////////////////////////////////
 /////////////////////////////////////////////////
 //////////////////////////////////////////////////
@@ -390,14 +410,14 @@ renderTaskCards();
 const createCard = function (datas) {
     datas.map(data =>{
         let html = `
-        <div class="task-card">
+        <div class="task-card" dataset = ${data.id}>
             <div class="task-card-categories">
                 <div>
                     <div class="task-category">
                         <img src="${data.priority.icon}"/>
                         <p>${data.priority.name}</p>
                     </div>
-                    <div class="department">${data.department.name}</div>
+                    <div class="department">${data.department.name ? shorten(data.department.name) : data.department.name}</div>
                 </div>
                 <p>22 იანვ, 2022</p>
             </div>
@@ -429,23 +449,31 @@ const createCard = function (datas) {
             statusFinishedContainer.innerHTML += html;
         } 
     });
+    const cards = document.querySelectorAll(".task-card");
+    cards.forEach((card) =>
+      card.addEventListener("click", function () {
+        window.location.href ="../pages/detailedTask.html";
+        const pageId = card.getAttribute("dataset");
+        localStorage.setItem("page-id", pageId);
+      })
+    );
 };
-createCard(tasksData);
-
-
 
 //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 // FILTER FUNCTIONALITY
 //
-const filterTasks = function () {
+function filterTasks() {
     let result = tasksData;
     console.log(result);
-    console.log(selectedEmployee);
-    //let selectedPriorities = [];
-     //let selectedEmployee
+    console.log(selectedPriorities);
 
+    statusGoingStartContainer.innerHTML ="";  
+    statusInProgressContainer.innerHTML = "";
+    statusReadyForTestingContainer.innerHTML = "";
+    statusFinishedContainer.innerHTML = "";
+  
   
     if (selectedDepartments[0]) {
       result = result.filter((task) => {
@@ -453,7 +481,6 @@ const filterTasks = function () {
           return task;
         }
       });
-      createCard(result);
     }
     if (selectedPriorities[0]) {
       result = result.filter((task) => {
@@ -461,55 +488,106 @@ const filterTasks = function () {
           return task;
         }
       });
-      createCard(result);
     }
+    console.log(selectedEmployee);
     if (selectedEmployee) {
+      const [name, surname] = selectedEmployee.split(" ");
       result = result.filter((task) => {
-        return (task.employee.name === selectedEmployee && task.employee.name === selectedEmployee)
+        return (task.employee.name === name && task.employee.surname === surname)
       });
-      createCard(result);
     } 
+    createCard(result);
 };
-//////////////////////////////////////////////
-/////////////////////////////////////////////
-/////////////////////////////////////////////
-// 
+//////////////////////////////////////////////////
+////////////////////////////////////////////////
+///////////////////////////////////////////////
+//
+//  Remove selected inputs
+//
+const userSelectionsContainer = document.querySelector(
+  ".user-inputs-container"
+);
+userSelectionsContainer.addEventListener("click", function (e) {
+  const clicked = e.target.closest(".close-icon");
+  const clickedText = clicked.previousElementSibling.textContent;
+  console.log(clickedText);
+  
 
+  if (!clicked) return;
+  console.log(clicked);
+  console.log(selectedDepartments);
 
-
-
-
-
-
-
-/*
-onst shorten = function(data){
- if(data.length > 1){
-   const datas = data.split(" ");
-   console.log(datas);
-   const ggg = datas.map(each => {
-     each.split(0, 3);
-    });
-  console.log(ggg);
- }
-};
-console.log(shorten("ssssss ddddd ddddd"));
-}
-//////
-/////
-/////
-const shorten = function(data) {
-  if (data.length > 1) {
-    const datas = data.split(" ");
-    console.log(datas);
-    
-    // Use slice instead of split for substring extraction
-    const ggg = datas.map(each => each.slice(0, 3));
-    
-    console.log(ggg);
-    return ggg; // Return the modified array
+  const filteredItem = clicked.parentElement;
+  filteredItem.remove(); 
+  
+  selectedDepartments = selectedDepartments.filter(department => {
+    return department !== clickedText
+  });
+  console.log(selectedDepartments);
+  selectedPriorities = selectedPriorities.filter(priority => {
+    return priority !== clickedText
+  });
+   
+  if(clickedText === selectedEmployee) {
+    selectedEmployee = null;
   }
-};
-console.log(shorten("ssssss ddddd ddddd"));
-*/
+
+  filterTasks();
+});
+///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+/*////////////////////////////////////////*/
+//  Clear button
+//
+btnClear.addEventListener("click", function () {
+  const selectionsContainer = document.querySelector(".selections-container");
+  //filteredInputs.remove();
+  selectionsContainer.innerHTML = "";
+  
+  selectedDepartments = [];
+  selectedPriorities = [];
+  selectedEmployee = null;
+
+  btnClear.classList.add("hidden");
+  filterTasks();
+
+  /*document.querySelectorAll('[type="checkbox"]').forEach((item) => {
+    item.checked = false;
+  });*/
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   

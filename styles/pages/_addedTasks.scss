@@ -306,8 +306,8 @@
 
   .cancel-icon-box{
     display:flex;
-    align-items: end;
-    justify-content: end;
+    align-items:flex-end;
+    justify-content:flex-end;
   }
   h2{
     font-size:2rem;
@@ -352,27 +352,7 @@
         width:8rem;
         height:8rem;
       }
-      .uploadImg-container {
-        height:15rem;
-        border: 1px dashed #999;
-        border-radius: 6px;
-        margin-top: 0.5rem;
       
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-
-        .image-upload {
-          display: none;
-          visibility: hidden;
-        }
-      }
-
-  
-
-
-
 
       label {
         display: block;
@@ -380,8 +360,7 @@
         font-weight: 600;
         margin-bottom: 0.5rem;
       }
-      input,
-       select {
+      input{
         width: 100%;
         padding: 0.8rem 3rem;
         font-size: 1.5rem;
@@ -393,6 +372,31 @@
 
     }
 
+  }
+}
+.select {
+  width: 100%;
+  padding: 0.8rem 3rem;
+  font-size: 1.5rem;
+  font-family: inherit;
+  color: inherit;
+  border: 1px solid #999;
+  border-radius: 5px;
+}
+.uploadImg-container {
+  height:15rem;
+  border: 1px dashed #999;
+  border-radius: 6px;
+  margin-top: 0.5rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  .image-upload {
+    display: none;
+    visibility: hidden;
   }
 }
 

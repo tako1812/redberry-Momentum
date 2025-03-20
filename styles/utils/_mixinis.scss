@@ -3,3 +3,19 @@
   padding: 0 3.2rem;
   margin: 0 auto;
 }
+@mixin heading-primary{
+  font-size:2rem;
+  font-weight:700;
+}
+@mixin heading-secondary{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+@mixin task-category-btn{
+  padding:0.3rem 0.8rem;
+  border-radius:4px;
+  display:flex;
+  align-items: center;
+  gap:0.5rem;
+
+}

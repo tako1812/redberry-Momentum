@@ -225,10 +225,11 @@ const sendJson = async function(url, uploadData) {
   const uploadData = async function(e) {
     e.preventDefault();
 
-    const validTitle = checkTitleValidation();
+    /*const validTitle = checkTitleValidation(); 
     const validDescription = checkDescriptionValidation();
+    const validDropdown = checkTaskDropdownsValidation();
     
-    if(!validTitle && !validDescription) return;
+    if(!validTitle && !validDescription && !validDropdown) return;*/
 
     const dataArr = [...new FormData(formCreateTask)];
     const data = Object.fromEntries(dataArr);

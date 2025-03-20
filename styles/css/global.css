@@ -305,31 +305,56 @@ header .header-container nav ul li a:visited:last-child:hover {
   padding: 0 3.2rem;
   margin: 0 auto;
 }
-.section-tasks .tasks-container .tasks-type-container {
-  display: flex;
-  justify-content: space-between;
+.section-tasks .tasks-container .taskCard-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  width: -moz-min-content;
+  width: min-content;
 }
-.section-tasks .tasks-container .tasks-type-container div {
+.section-tasks .tasks-container .taskCard-container .status-title {
   padding: 1.5rem 10rem;
   border-radius: 10px;
   color: #fff;
+  margin-bottom: 2rem;
 }
-.section-tasks .tasks-container .tasks-type-container div:nth-child(1) {
+.section-tasks .tasks-container .taskCard-container .status-goingStart .status-title {
   background-color: #F7BC30;
 }
-.section-tasks .tasks-container .tasks-type-container div:nth-child(2) {
+.section-tasks .tasks-container .taskCard-container .status-goingStart .task-card {
+  border: 1px solid #F7BC30;
+}
+.section-tasks .tasks-container .taskCard-container .status-goingStart .task-card .task-category {
+  border: 1px solid #F7BC30;
+}
+.section-tasks .tasks-container .taskCard-container .status-inProgress .status-title {
   background-color: #FB5607;
 }
-.section-tasks .tasks-container .tasks-type-container div:nth-child(3) {
-  background-color: #FF006E;
+.section-tasks .tasks-container .taskCard-container .status-inProgress .task-card {
+  border: 1px solid #FB5607;
 }
-.section-tasks .tasks-container .tasks-type-container div:nth-child(4) {
+.section-tasks .tasks-container .taskCard-container .status-inProgress .task-card .task-category {
+  border: 1px solid #FB5607;
+}
+.section-tasks .tasks-container .taskCard-container .status-readyForTesting .status-title {
+  background-color: #FF006E;
+  display: flex;
+  gap: 0.2rem;
+}
+.section-tasks .tasks-container .taskCard-container .status-readyForTesting .task-card {
+  border: 1px solid #FF006E;
+}
+.section-tasks .tasks-container .taskCard-container .status-readyForTesting .task-card .task-category {
+  border: 1px solid #FF006E;
+}
+.section-tasks .tasks-container .taskCard-container .status-finished .status-title {
   background-color: #3A86FF;
 }
-.section-tasks .tasks-container .taskCard-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-top: 3rem;
+.section-tasks .tasks-container .taskCard-container .status-finished .task-card {
+  border: 1px solid #3A86FF;
+}
+.section-tasks .tasks-container .taskCard-container .status-finished .task-card .task-category {
+  border: 1px solid #3A86FF;
 }
 .section-tasks .tasks-container .taskCard-container .task-card {
   width: 28rem;
@@ -354,7 +379,6 @@ header .header-container nav ul li a:visited:last-child:hover {
 }
 .section-tasks .tasks-container .taskCard-container .task-card .task-card-categories .task-category {
   padding: 0.3rem 0.8rem;
-  border: 0.5px solid black;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -381,9 +405,9 @@ header .header-container nav ul li a:visited:last-child:hover {
   align-items: center;
 }
 .section-tasks .tasks-container .taskCard-container .task-card .task-card-employee img {
-  width: 1.8rem;
-  height: 1.8rem;
-  border-radius: 10px;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 15px;
 }
 .section-tasks .tasks-container .taskCard-container .task-card .task-card-employee div {
   display: flex;
@@ -619,6 +643,9 @@ html {
 }
 .dropdown-container .dropdown-btn-employee {
   width: 100%;
+}
+.dropdown-container .dropdown-btn-employee {
+  height: 4rem;
 }
 .dropdown-container .dropdown-content {
   position: absolute;

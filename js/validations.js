@@ -12,6 +12,9 @@ const surnameValidationText = document.querySelector(".surname-validation-text")
 
 
 const checkSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
+const emptyInput = (inputs) => inputs.trim() === "";
+const validMinWords = (inputs) => inputs.trim().split(" ").length > 4;
+const validMaxSymbols = (input) => input.trim().length <= 255;
 //const checkData = (input) => input.split(" ").length < 4;
 
 
@@ -86,15 +89,20 @@ const checkTitleValidation = function() {
 const checkDescriptionValidation = function() {
     let result = true;
     let description = taskDescription.value;
-    if(checkSymbols(description)){ 
+    if(validMinWords(description) || validMaxSymbols(description)){ 
         descriptionValidationText.classList.add("valid");
         descriptionValidationText.classList.remove("invalid");
     }
 
-    if(!checkSymbols(description)) {
-        descriptionValidationText .classList.add("invalid");
+    if(!validMinWords(description) || !validMaxSymbols(description)) {
+        descriptionValidationText.classList.add("invalid");
         result = false;
     } 
+    if(emptyInput(description)) {
+        descriptionValidationText.classList.remove("invalid");
+        descriptionValidationText.classList.remove("valid");
+    }
+
     return result;
 }
 inputTitle.addEventListener("input", checkTitleValidation);

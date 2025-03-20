@@ -219,6 +219,9 @@ const renderUserInputsBtns = function(e) {
     if (html) btnClear.classList.remove("hidden");
 }
   selectionsContainer.innerHTML = html;
+
+  filterTasks();
+  
 }
 filtersBox.addEventListener("click",  renderUserInputsBtns);
 ///////////////////////////////////////////////////////////////
@@ -267,32 +270,32 @@ const toggleModalWindow = function() {
 ///////////////////////////////////////////
 const departmentsContainer = document.querySelector(".departments-container");
   
-  const renderDepartments = async function () {
+const renderDepartments = async function () {
     departmentsContainer.innerHTML = "";
     const res = await fetch(
-      "https://momentum.redberryinternship.ge/api/departments"
+        "https://momentum.redberryinternship.ge/api/departments"
     );
     const datas = await res.json();
     console.log(datas);
     departments = datas;
-  
+
     datas.map(data => {
         const html = `
         <option value="${data.id}">${data.name}</option>
         `;
         departmentsContainer.insertAdjacentHTML("afterbegin", html);
     });
-  };
-  renderDepartments();
+};
+renderDepartments();
   ////////////////////////////////////////////
   ///////////////////////////////////////////
   /////////////////////////////////////////
   //  POST REQUEST OF ADD EPLOYEE
   //
-  const addEmployeeFormContainer = document.querySelector(".add-employee-form");
-  const btnAddEmplayee = document.querySelector(".btn-add-imployee");
+const addEmployeeFormContainer = document.querySelector(".add-employee-form");
+const btnAddEmplayee = document.querySelector(".btn-add-imployee");
 
-  const sendJson = async function(url, uploadData) {
+const sendJson = async function(url, uploadData) {
     try{
         const fetchData = await fetch(url,{
             method:"POST",
@@ -302,16 +305,16 @@ const departmentsContainer = document.querySelector(".departments-container");
             },
             body: uploadData,
         }
-    );
-    const data = await fetchData.json();
-    return data;
+       );
+        const data = await fetchData.json();
+        return data;
     }catch (err){
         throw err;
     }
-  };
+};
 
   
-  const uploadData = async function(e) {
+const uploadData = async function(e) {
     e.preventDefault();
 
     const dataArr = [...new FormData(addEmployeeFormContainer)];
@@ -335,24 +338,23 @@ const departmentsContainer = document.querySelector(".departments-container");
     console.log(formData);
     const datas = await sendJson("https://momentum.redberryinternship.ge/api/employees",formData);
     console.log(datas);
-  };
-  addEmployeeFormContainer.addEventListener("submit",uploadData);*/
+};
+addEmployeeFormContainer.addEventListener("submit",uploadData);*/
 
   /////////////////////////////////////////////////////
   ///////////////////////////////////////////////////
   //GET CARDS DATA
   //
-  const statusGoingToStartContainer = document.querySelector(".status-goingToStart");
-  const statusReadyForTestingContainer =document.querySelector(".status-inProgress");
-  const statusInProgressContainer = document.querySelector(".status-readyForTesting");
-  const statusFinishedContainer = document.querySelector(".status-finished");
-
+  const statusGoingStartContainer = document.querySelector(".status-goingStart-card");
+  const statusInProgressContainer = document.querySelector(".status-inProgress-card");
+  const statusReadyForTestingContainer = document.querySelector(".status-readyForTesting-card");
+  const statusFinishedContainer = document.querySelector(".status-finished-card");
 
 
   let tasksData;
-  const renerTaskCards = async function () {
+const renderTaskCards = async function () {
     
-  
+
     const res = await fetch(
       "https://momentum.redberryinternship.ge/api/tasks",
       {
@@ -364,34 +366,48 @@ const departmentsContainer = document.querySelector(".departments-container");
       }
     );
     const datas = await res.json();
+    console.log(datas);
     tasksData = datas;
-    
-    /*const statusGoingToStartContainer = datas.filter(data => data.status === "დასაწყები");
-    const statusReadyForTestingContainer = datas.filter(data => data.status === "მზად ტესტირებისთვის");
-    const statusInProgressContainer = datas.filter(data => data.status === "პროგრესში");
-    const statusFinishedContainer = datas.filter(data => data.status === "დასრულებული");*/
 
+    /*
+    const departments = datas.map(data => {
+         data.department.name;
+    });
+    const departmentCategories = [...new Set(departments)];
+    console.log(departmentCategories);
+
+    str.split(" ").map(word => word.slice(0, 3));
+   }
+    
+    */
+    
+};
+renderTaskCards();
+////////////////////////////////////////////////
+/////////////////////////////////////////////////
+//////////////////////////////////////////////////
+// CREATE CARD
+const createCard = function (datas) {
     datas.map(data =>{
-        const html = `
+        let html = `
         <div class="task-card">
             <div class="task-card-categories">
                 <div>
-                <div class="task-category">
-                    <img src="./assets/images/Medium.png"/>
-                    <p>საშუალო</p>
-                </div>
-                <div class="department">დიზიანი</div>
+                    <div class="task-category">
+                        <img src="${data.priority.icon}"/>
+                        <p>${data.priority.name}</p>
+                    </div>
+                    <div class="department">${data.department.name}</div>
                 </div>
                 <p>22 იანვ, 2022</p>
             </div>
             <div class="task-card-description">
-                <h3>redberry-ს საიტის ლისტინგის დიზიანი</h3>
-                <p>შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
-                სექციებს და ნავიგაციას
+                <h3>${data.name}</h3>
+                <p>${data.description}
                 </p>
             </div>
             <div class="task-card-employee">
-                <img src="./assets/images/customer-1.jpg"/>
+                <img src="${data.employee.avatar}"/>
                 <div>
                 <img src="./assets/images/Comments.png"/>
                 <p>8</p>
@@ -399,23 +415,101 @@ const departmentsContainer = document.querySelector(".departments-container");
             </div>
         </div>
         `;
-        if(data.status === "დასაწყები"){
-            statusGoingToStartContainer.innerHTML = html;
+        
+        if(data.status.name === "დასაწყები"){
+            statusGoingStartContainer.innerHTML += html;
         }
-        if(data.status === "პროგრესში"){
-            statusReadyForTestingContainer.innerHTML = html;
+        if(data.status.name === "პროგრესში"){
+            statusInProgressContainer.innerHTML += html;
         }
-        if(data.status === "მზად ტესტრირებისთვის"){
-            statusInProgressContainer.innerHTML = html;
+        if(data.status.name === "მზად ტესტირებისთვის"){
+            statusReadyForTestingContainer.innerHTML += html;
         }
-        if(data.status === "დასრულებული"){
-            statusFinishedContainer.innerHTML = html;
-        }
-
+        if(data.status.name === "დასრულებული"){
+            statusFinishedContainer.innerHTML += html;
+        } 
     });
 };
+createCard(tasksData);
+
+
+
 //////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
 // FILTER FUNCTIONALITY
 //
+const filterTasks = function () {
+    let result = tasksData;
+    console.log(result);
+    console.log(selectedEmployee);
+    //let selectedPriorities = [];
+     //let selectedEmployee
+
+  
+    if (selectedDepartments[0]) {
+      result = result.filter((task) => {
+        if (selectedDepartments.includes(task.department.name)) {
+          return task;
+        }
+      });
+      createCard(result);
+    }
+    if (selectedPriorities[0]) {
+      result = result.filter((task) => {
+        if (selectedPriorities.includes(task.priority.name)) {
+          return task;
+        }
+      });
+      createCard(result);
+    }
+    if (selectedEmployee) {
+      result = result.filter((task) => {
+        return (task.employee.name === selectedEmployee && task.employee.name === selectedEmployee)
+      });
+      createCard(result);
+    } 
+};
+//////////////////////////////////////////////
+/////////////////////////////////////////////
+/////////////////////////////////////////////
+// 
+
+
+
+
+
+
+
+
+/*
+onst shorten = function(data){
+ if(data.length > 1){
+   const datas = data.split(" ");
+   console.log(datas);
+   const ggg = datas.map(each => {
+     each.split(0, 3);
+    });
+  console.log(ggg);
+ }
+};
+console.log(shorten("ssssss ddddd ddddd"));
+}
+//////
+/////
+/////
+const shorten = function(data) {
+  if (data.length > 1) {
+    const datas = data.split(" ");
+    console.log(datas);
+    
+    // Use slice instead of split for substring extraction
+    const ggg = datas.map(each => each.slice(0, 3));
+    
+    console.log(ggg);
+    return ggg; // Return the modified array
+  }
+};
+console.log(shorten("ssssss ddddd ddddd"));
+*/
+  

@@ -129,38 +129,74 @@
   .tasks-container{
     @include container;
   
-    .tasks-type-container{
-       display:flex;
-       justify-content: space-between;
-
-       div {
-        padding: 1.5rem 10rem;
-        border-radius: 10px;
-        color:#fff;
-        
-
-
-        &:nth-child(1) {
-          background-color: #F7BC30;
-        }
-        &:nth-child(2) {
-          background-color: #FB5607;
-        }
-        &:nth-child(3) {
-          background-color: #FF006E;
-        }
-        &:nth-child(4) {
-          background-color: #3A86FF;
-        }
-       }
-    }
-
-
+    
+  
 
     .taskCard-container{
       display:grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
-      margin-top: 3rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap:1rem;
+      width: min-content;
+
+      .status-title{
+        padding: 1.5rem 10rem;
+        border-radius: 10px;
+        color:#fff;
+        margin-bottom: 2rem;
+
+        
+      }
+      .status-goingStart{
+        .status-title{
+          background-color: $color-goingStart;
+        }
+        .task-card{
+          border: 1px solid $color-goingStart;
+
+          .task-category {
+            border: 1px solid $color-goingStart;
+          }
+        }
+      }
+      .status-inProgress{
+        .status-title{
+          background-color: $color-inProgress;
+        }
+        .task-card{
+          border: 1px solid $color-inProgress;
+          
+          .task-category {
+            border: 1px solid $color-inProgress;
+          }
+        }
+      }
+      .status-readyForTesting{
+        .status-title{
+          background-color: $color-readyForTesting;
+          display:flex;
+          gap:0.2rem;
+        }
+        .task-card{
+          border: 1px solid $color-readyForTesting;
+
+          .task-category {
+            border: 1px solid $color-readyForTesting;
+          }
+        }
+      }
+      .status-finished{
+        .status-title{
+          background-color: $color-finished;
+        }
+        .task-card{
+          border: 1px solid $color-finished;
+
+          .task-category {
+            border: 1px solid $color-finished;
+          }
+        }
+
+      }
 
 
       .task-card{
@@ -190,7 +226,6 @@
 
           .task-category{
             padding:0.3rem 0.8rem;
-            border: 0.5px solid black;
             border-radius:4px;
             display:flex;
             align-items: center;
@@ -222,9 +257,9 @@
           align-items: center;
 
           img{
-            width:1.8rem;
-            height:1.8rem;
-            border-radius: 10px;
+            width:2.5rem;
+            height:2.5rem;
+            border-radius: 15px;
 
           }
           div{
@@ -382,6 +417,7 @@
 .invalid{
   color:red;
 }
+
 
 .hidden {
     visibility: hidden;

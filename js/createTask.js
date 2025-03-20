@@ -25,7 +25,6 @@ const renderPriorities = async function () {
     });
     
     const [defaultValue] = datas.filter((data) => data.name === "საშუალო"); 
-    console.log(defaultValue);
      const imgSource =defaultValue.icon;
      const category = defaultValue.name;
      iconSelected.setAttribute("src", imgSource);
@@ -53,6 +52,7 @@ const statusesContainer = document.querySelector(".statuses-container");
 
         statusesContainer.insertAdjacentHTML("afterbegin", html);
     });
+    //datas[0].setAttribute("class", "remove");
   };
   renderStatuses();
   /////////////////////////////////////////
@@ -132,53 +132,9 @@ const statusesContainer = document.querySelector(".statuses-container");
       
       dropdownContentEmployees.insertAdjacentHTML("afterbegin", html);
     });
-    /*
-    dropdownBtnEmployee.innerHTML = "";
-    const markup = 
-    `<div class="default">
-        <img class="info-employee-img"src="${departmentEmployee[0].avatar}" alt="priority icon"/>
-        <p class="info-employee-fullName">${departmentEmployee[0].name} ${departmentEmployee[0].surname}</p>
-     </div>
-    `;
-    dropdownBtnEmployee.insertAdjacentHTML("afterbegin", markup);*/
-
-
-
-
-
+    
   })
-////////////////////////////////
-///////////////////////////////
-/*
-const renderEmployees = async function () {
-  dropdownContentEmployee.innerHTML = "";
-  
-  const res = await fetch("https://momentum.redberryinternship.ge/api/employees",
-      {
-          method: "GET",
-          headers: {
-          Authorization: `Bearer ${token}`,
-          accept: "application/json",
-          },
-      }
-      );
-      const datas = await res.json();
-      console.log(datas);
-
-      datas.map(data => {
-          const html = `
-           <a class="img-icon-container">
-             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20200630132504/uflag.jpg" alt="priority icon"/>
-            <p class="category">დაბალი</p>
-          </a>
-      `;
-
-      dropdownContentEmployee.insertAdjacentHTML("afterbegin", html);
-  });
-
-};
-renderFilterEmployees();*/
-
+/////////////////////////////////////////////
 
 
 
@@ -235,15 +191,10 @@ dropdownContentEmployees.addEventListener("click", dropdownBtnFunctionality.bind
 /////////////////////////////////////
 //dropdown-btn-employee
 const dropdownBtnEmployee = document.querySelector(".dropdown-btn-employee");
-//const dropdownContentEmployee = document.querySelector(".dropdown-content-employees");
 const iconEmployee = document.querySelector(".icon-selected-emoloyee");
 const categoryEmployee = document.querySelector(".category-selected-employee");
 const employeeInfoContainer = document.querySelector(".employee-info-container");
-//employees-container
-/*dropdownBtnEmployee.addEventListener("click", function(e) {
-  e.preventDefault();
-  dropdownContentEmployees.classList.toggle("hidden");
-});*/
+
 ///////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
 //////////////////////////////////////////////////////
@@ -285,12 +236,6 @@ const sendJson = async function(url, uploadData) {
     
     console.log(inputDataValue.value);
     console.log(data.title);
-    /*const taskData = {
-        name: data.name,
-        surname: data.surname, 
-        avatar:data.avatar, 
-        department_id: data.department
-    };*/
 
     const formData = new FormData();
 

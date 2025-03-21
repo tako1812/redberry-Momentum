@@ -34,68 +34,132 @@
     </header>
     <main>
       <section class="detailed-section">
-        <div class="taskDetaild-container">
-          <div class="main-content">
-            <div class="header-container">
-              <div class="categ-dep-container">
-                <div class="task-category">
-                  <img class="task-category-icon" src="../assets/images/Medium.png"/>
-                  <p class="task-category-text">საშუალო</p>
+        <div class="detaild-container">
+          <div class="taskDetaild-container">
+            <div class="main-content">
+              <div class="header-container">
+                <div class="categ-dep-container">
+                  <div class="task-category">
+                    <img class="task-category-icon" src="../assets/images/Medium.png"/>
+                    <p class="task-category-text">საშუალო</p>
+                  </div>
+                  <div class="task-department-btn department">დიზიანი</div>
                 </div>
-                <div class="task-department-btn department">დიზიანი</div>
+                <h2 class="task-heading">redberry-ს საიტის ლისტინგის დიზიანი</h2>
               </div>
-              <h2 class="task-heading">redberry-ს საიტის ლისტინგის დიზიანი</h2>
+              <div>
+                <p class="task-description">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
+                    სექციებს და ნავიგაციას
+                </p>
+              </div>
             </div>
+            <div class="details-content">
+              <p class="heading-details">დავალების დეტალები</p>
+                
+              <div class="container status-container">
+                <div class="icon-text-container">
+                    <img src="../assets/icons/pie-chart.png" alt="pie-chart icon"/>
+                    <p>სტატუსი</p>
+                </div>
+                <form>
+                  <select
+                      class="select statuses-container"
+                      name="status"
+                      id="select-status3"
+                  >
+                  <option> </option>
+                  </select>
+                </form>                       
+              </div>
+              <div class="container">
+                <div class="icon-text-container">
+                    <img src="../assets/icons/user.png" alt="user icon"/>
+                    <p>თანამშრომელი</p>
+                </div>
+                <div class="employee-info-container">
+                  <img class="task-employee-image" src="../assets/images/customer-2.jpg" alt="responsible employee image"/>
+                  <div>
+                    <p class="task-department">დეპარტამენტი</p>
+                    <p class="task-employee">ანი არაბული</p>
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="icon-text-container">
+                    <img src="../assets/icons/calendar.png" alt="calendar icon"/>
+                    <p>დავალების ვადა</p>
+                </div>
+                <p class="deadline-date">ორშ-02/08/2025</p>
+              </div>
+
+            </div>
+
+          </div>
+          <div class="comments-container">
+            <form>
+              <textarea
+                name="description"
+                class="textarea"
+                minlength="2"
+                maxlength="255"
+                placeholder="დაწერე კომენტარი"
+              ></textarea>
+              <div class="btn-createTask-box">
+                  <button type="submit" class="btn btn-create btn-create-comment">
+                    დაკომენტარე
+                  </button>
+              </div>  
+            </form>
             <div>
-              <p class="task-description">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
-                  სექციებს და ნავიგაციას
-              </p>
-            </div>
-          </div>
-          <div class="details-content">
-            <p class="heading-details">დავალების დეტალები</p>
-            <div class="container status-container">
-              <div class="icon-text-container">
-                  <img src="../assets/icons/pie-chart.png" alt="pie-chart icon"/>
-                  <p>სტატუსი</p>
+              <div class="comments-amount">
+                <h3>კომენტარები</h3> 
+                <div>3</div>
               </div>
-              <form>
-                <select
-                    class="select statuses-container"
-                    name="status"
-                    id="select-status3"
-                >
-                <option> </option>
-                </select>
-              </form>                       
-            </div>
-            <div class="container">
-              <div class="icon-text-container">
-                  <img src="../assets/icons/user.png" alt="user icon"/>
-                  <p>თანამშრომელი</p>
-              </div>
-              <div class="employee-info-container">
-                <img class="task-employee-image" src="../assets/images/customer-2.jpg" alt="responsible employee image"/>
-                <div>
-                  <p class="task-department">დეპარტამენტი</p>
-                  <p class="task-employee">ანი არაბული</p>
+              <div class="comments">
+                <img class="author-image"src="../assets/images/customer-1.jpg" alt="author of comment">
+                <div class="author-container">
+                  <div class="container">
+                    <p class="author-fullname">ემილია მორგანი</p>
+                    <p class="comment">დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანია
+                      რომ ყველა ელემენტს ქონდეს შესაბამისი რეზოლუცია
+                    </p>
+                    <img class="comment-icon"src="../assets/icons/comment.png" alt="add comment icon">
+                  </div>
+                  <div class="add-comment-container">
+                    <form class="form-comment">
+                      <textarea
+                        name="description"
+                        class="textarea"
+                        minlength="2"
+                        maxlength="255"
+                        placeholder="დაწერე კომენტარი"
+                      ></textarea>
+                      <div class="btn-createTask-box">
+                          <button type="submit" class="btn btn-create btn-create-task">
+                            დაკომენტარე
+                          </button>
+                      </div>  
+                    </form>
+                    <div class="nested-comment-container">
+                      <img class="author-image"src="../assets/images/customer-1.jpg" alt="author of comment">
+                        <div>
+                          <p class="author-fullname">ემილია მორგანი</p>
+                          <p class="comment">დიზაინი სუფთად ჩანს, მაგრამ კოდირებისას მნიშვნელოვანია
+                            რომ ყველა ელემენტს ქონდეს შესაბამისი რეზოლუცია
+                          </p>
+                        </div>
+                    </div>
+                  </div>
+        
                 </div>
+
               </div>
-            </div>
-            <div class="container">
-              <div class="icon-text-container">
-                  <img src="../assets/icons/calendar.png" alt="calendar icon"/>
-                  <p>დავალების ვადა</p>
-              </div>
-              <p class="deadline-date">ორშ-02/08/2025</p>
             </div>
 
           </div>
-
         </div>
-
       </section>
-      <section></section>
+      
       
     </main>
     

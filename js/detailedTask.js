@@ -74,3 +74,12 @@ const renderStatuses = async function (taskStatusValue) {
       taskStatus.insertAdjacentHTML("afterbegin", html);
   });
 };
+///////////////////////////////////////
+//   COMMENTS
+const commentIcon = document.querySelector(".comment-icon");
+const formCommentContainer = document.querySelector(".form-comment");
+
+const toggleCommentArea = function(e) {
+  formCommentContainer.classList.toggle("hidden");
+}
+commentIcon.addEventListener("click", toggleCommentArea);

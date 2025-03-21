@@ -1,0 +1,219 @@
+.detailed-section{
+    padding: 10rem 0;
+    .detaild-container{
+        max-width: 120rem;
+        padding: 0 3.2rem;
+        margin: 0 auto;
+        display:flex;
+        gap:18rem;
+
+        .taskDetaild-container{
+            align-self: flex-start;
+            display:flex;
+            flex-direction: column;
+            gap:2rem;
+    
+            .main-content{
+                display:flex;
+                flex-direction: column;
+                gap:2rem;
+    
+                .header-container {
+                    display:flex;
+                    flex-direction: column;
+                    gap:1rem;
+    
+                    .categ-dep-container{
+                        display:flex;
+    
+                        .task-category{
+                            padding:0.3rem 0.8rem;
+                            border-color: #F7BC30;
+                            border-radius:4px;
+                            display:flex;
+                            align-items: center;
+                            gap:0.5rem;
+                        }
+                        .department {
+                            padding:0.7rem 1.2rem;
+                            background-color: #F7BC30;
+                            color:#fff;
+                            border-radius:10px;
+                            text-align: center;  
+                        } 
+                    }
+                    h2{
+                        font-size:2.3rem;
+                        font-weight: 700;
+                    }
+    
+                }
+                p{font-size: 1.6rem;
+                font-weight: 500;
+                color:#474747;
+                }
+            }
+            .details-content{
+                display:flex;
+                flex-direction: column;
+                gap:2.3rem;
+            
+    
+                .heading-details{
+                    font-size:1.8rem;
+                    font-weight: 700;
+                }  
+    
+                .container{
+                    display:flex;
+                    gap:5rem;
+                }
+                .icon-text-container{
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap:0.3rem;
+                }
+    
+                .status-container{
+                    
+                    select{
+                        padding: 0.5rem 2rem 1rem;
+                        font-size: 1.5rem;
+                        font-family: inherit;
+                        border: 1px solid #999;
+                        border-radius: 5px;
+                    }
+                }
+                
+                .employee-info-container {
+                    display:flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap:1rem;
+    
+                    img{
+                        width:3.5rem;
+                        height:3.5rem;
+                        border-radius: 15px;
+                    }
+                    div{
+                        display:flex;
+                        flex-direction: column;
+                        gap:0.5rem;
+                    }
+                    .task-employee{
+                        font-weight: 600;
+                    }
+                }
+                .deadline-date{
+                    align-self: center;
+                }
+    
+            }
+            p{
+                font-size: 1.6rem;
+                font-weight: 500;
+                color:#474747;
+            }
+        }
+        .comments-container{
+            padding:6rem 3rem 10rem ;
+            background-color: #d4d2dd50;
+
+            form{
+                //display: flex;
+                //flex-direction: column;
+                .textarea {
+                    width: 100%;
+                    height: 10rem;
+                    border: 2.5px solid #808a9370;
+                    border-radius: 9px;
+                    padding: 2rem;
+                    resize: none;
+                }
+                .btn-create-comment{
+                    //align-self: flex-end;
+                    //position: absolute;
+                    //top:22%;
+                    //right:18%;
+                    //transform:translate(-20%,-80%);
+                  
+    
+                }
+
+            }
+            .comments-amount{
+                margin:1.7rem 0;
+                display:flex;
+                align-items: center;
+                gap:1rem;
+                
+                h3{
+                    font-size: 1.5rem;
+                    font-weight: 600;
+                }
+                div{
+                    padding:0.8rem 1rem;
+                    border-radius: 15px;
+                    color:#fff;
+                    background-color: $color-primary-dark;
+                }
+
+
+
+            }
+
+            .comments{
+                display:flex;
+                gap:2rem;
+
+                .author-image{
+                   width:4rem;
+                   height:4rem;
+                   border-radius: 15px;
+                }
+                .author-container{
+                    display:flex;
+                    flex-direction: column;
+                    gap:1rem;
+                    .container{
+                        display:flex;
+                        flex-direction: column;
+                        gap:1rem;
+                        .comment-icon{
+                            width:7rem;
+                        }
+                    }
+                    .nested-comment-container{
+                        display:flex;
+                        align-items: center;
+                        gap:1rem;
+                        div{
+                            display: flex;
+                            flex-direction: column;
+                            gap:0.7rem;
+                        }
+                    }
+                    .add-comment-container{
+                        display:flex;
+                        flex-direction: column;
+                        gap:2rem;
+                    }
+                }
+            }
+            .author-fullname{
+                font-size:1.4rem;
+                font-weight: 600;
+            }
+            .comment{
+                font-size:1.3rem;
+                color:#343A40;
+            }
+        }
+
+    }
+}
+.hidden{
+    display:none;
+}

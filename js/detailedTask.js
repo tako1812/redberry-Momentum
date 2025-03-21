@@ -1,20 +1,13 @@
 "use strict";
+const token = "9e73c158-43ef-4fd6-9f0e-70385f360191";
+const pageId = localStorage.getItem("page-id");
 
 
-
-
-
-
-
-
-
-
-
-const createListingDetailed = async function () {
-    const token = "9d109274-ed65-48e6-a843-284dc8f78e83";
+const createCardDetailed = async function () {
+  
   
     const res = await fetch(
-      `https://api.real-estate-manager.redberryinternship.ge/api/real-estates/${pageId}`,
+      `https://momentum.redberryinternship.ge/api/tasks/${pageId}`,
       {
         method: "GET",
         headers: {
@@ -24,33 +17,60 @@ const createListingDetailed = async function () {
       }
     );
     const datas = await res.json();
-    cardData.push(datas);
     console.log(datas);
   
-    const mainImage = document.querySelector(".img-detailed");
-    const listingPrice = document.querySelector(".listing-price");
-    const listingLocation = document.querySelector(".listing-details-location");
-    const listingArea = document.querySelector(".listing-details-area");
-    const listingBedrooms = document.querySelector(".listing-details-bedrooms");
-    const listingPostcode = document.querySelector(".listing-details-postcode");
-    const listingTextarea = document.querySelector(".listing-textarea");
-    const agentImage = document.querySelector(".agent-image");
-    const agentName = document.querySelector(".listing-details-name");
-    const agentEmail = document.querySelector(".listing-details-email");
-    const agentNumber = document.querySelector(".listing-details-number");
+    
+    const deadlineData = (formatDeadlineDate(datas.due_date));
   
-    mainImage.src = datas.image;
-    listingPrice.textContent = datas.price;
-    listingLocation.textContent = (datas.city.name, datas.address);
-    listingArea.textContent = datas.area;
-    listingBedrooms.textContent = datas.bedrooms;
-    listingPostcode.textContent = datas.zip_code;
-    listingTextarea.textContent = datas.description;
-    agentImage.src = datas.agent.avatar;
-    agentName.textContent = (datas.agent.name, datas.agent.surname);
-    agentEmail.textContent = datas.agent.email;
-    agentNumber.textContent = datas.agent.phone;
-    sss.style.display = "block";
+    const taskCategoryIcon = document.querySelector(".task-category-icon");
+    const taskCategory = document.querySelector(".task-category-text");
+    const taskDepartmentBtn = document.querySelector(".task-department-btn");
+    const taskHeading = document.querySelector(".task-heading");
+    const taskDescription = document.querySelector(".task-description");
+    const taskStatus = document.querySelector(".statuses-container");
+    const taskEmployeeImg = document.querySelector(".task-employee-image");
+    const taskDepartment = document.querySelector(".task-department");
+    const taskEmployee = document.querySelector(".task-employee");
+    const taskDeadline = document.querySelector(".deadline-date");
+    
+    taskCategoryIcon.src = datas.priority.icon;
+    taskCategory.textContent = datas.priority.name;
+    taskDepartmentBtn.textContent = datas.department.name;
+    taskHeading.textContent = datas.name;
+    taskDescription.textContent = datas.description;
+    taskStatus.value = datas.status.name;
+    taskEmployeeImg.src = datas.employee.avatar; 
+    taskDepartment.textContent = datas.department.name;
+    //taskEmployee.textContent = datas.employee.name;
+    taskEmployee.textContent = datas.employee.surname;
+    taskDeadline.textContent = deadlineData;
+
+    renderStatuses(datas.status.name);
+
   };
-  //listingDetailedContainer.innerHTML = " ";
-  createListingDetailed();
+  createCardDetailed();
+
+
+const taskStatus = document.querySelector(".statuses-container");
+
+const renderStatuses = async function (taskStatusValue) {
+  taskStatus.innerHTML = "";
+  const res = await fetch(
+    "https://momentum.redberryinternship.ge/api/statuses"
+  );
+  const datas = await res.json();
+  console.log(datas);
+
+  const html = `
+      <option value="${taskStatusValue}">${taskStatusValue}</option>
+      `;
+      taskStatus.insertAdjacentHTML("afterbegin", html);
+
+  datas.map(data => {
+      const html = `
+      <option value="${data.id}">${data.name}</option>
+      `;
+
+      taskStatus.insertAdjacentHTML("afterbegin", html);
+  });
+};

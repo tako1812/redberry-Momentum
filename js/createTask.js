@@ -44,6 +44,11 @@ const statusesContainer = document.querySelector(".statuses-container");
     );
     const datas = await res.json();
     console.log(datas);
+
+    const html = `
+        <option value=""></option>
+        `;
+        statusesContainer.insertAdjacentHTML("afterbegin", html);
   
     datas.map(data => {
         const html = `
@@ -71,13 +76,16 @@ const statusesContainer = document.querySelector(".statuses-container");
     const datas = await res.json();
     console.log(datas);
     dataDepartments = datas; 
-    
+      
+    const html = `
+        <option class="department" value=""></option>
+        `;
+        departmentContainer.insertAdjacentHTML("afterbegin", html);
 
     datas.map(data => {
         const html = `
         <option class="department" value="${data.id}">${data.name}</option>
         `;
-
         departmentContainer.insertAdjacentHTML("afterbegin", html);
     });
 
@@ -102,9 +110,10 @@ const statusesContainer = document.querySelector(".statuses-container");
 ///////////////////////////////////////////////////////
  
   const selectedDepartment = document.querySelector(".departments-dropdown");
+  //employeeContainer.innerHTML="";
   let btnEmployeeHasLisener = false;
-
-  selectedDepartment.addEventListener("change", function(e) {
+  
+  const renderEmployees = function(e) {
     employeeLabel.classList.remove("disable");
 
     if(!btnEmployeeHasLisener) {
@@ -132,8 +141,9 @@ const statusesContainer = document.querySelector(".statuses-container");
       
       dropdownContentEmployees.insertAdjacentHTML("afterbegin", html);
     });
-    
-  })
+  };
+  selectedDepartment.addEventListener("change", renderEmployees);
+
 /////////////////////////////////////////////
 
 
@@ -185,6 +195,150 @@ const dropdownBtnFunctionality = function(e) {
 dropdownContentPriorities.addEventListener("click", dropdownBtnFunctionality.bind(".img-icon-container"));
 dropdownContentEmployees.addEventListener("click", dropdownBtnFunctionality.bind(".employee-info-container"));
 
+///////////////////////////////////////////
+// VALIDATIONS
+
+const inputTitle = document.querySelector(".input-title");
+const taskDescription = document.querySelector(".task-description");
+const titleValidationText = document.querySelector(".title-validation-text");
+const descriptionValidationText = document.querySelector(".description-validation-text");
+
+const checkSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
+const emptyInput = (inputs) => inputs.trim() !== "";
+const validMinWords = (inputs) => inputs.trim().split(" ").length > 4;
+const validMaxSymbols = (input) => input.trim().length <= 255;
+
+const dataInput = document.querySelector(".data-input");
+let deadlineData;
+
+const config = {
+    dateFormat: "d.m.Y",
+    minDate: new Date().fp_incr(1),
+}
+const {data} =config.minDate;
+console.log(data);
+flatpickr(".data-input", config);
+/*
+const sss = function(selectedDates, dateStr, instance) {
+    console.log(dateStr);      
+} */
+//dataInput.addEventListener("change", sss);
+/*const checkDataValidation = function() {
+    deadlineData = dataInput.value;
+    console.log(deadlineData);
+
+}
+dataInput.addEventListener("change", checkDataValidation);*/
+const checkTitleValidation = function() {
+  let result = true;
+  let title = inputTitle.value;
+
+  if(checkSymbols(title)){ 
+      titleValidationText.classList.add("valid");
+      titleValidationText.classList.remove("invalid");
+  }
+  if(!checkSymbols(title)) {
+      titleValidationText.classList.add("invalid");
+      result = false;
+  } 
+  return result;
+}
+
+const checkDescriptionValidation = function() {
+  let result = true;
+  let description = taskDescription.value;
+  if(validMinWords(description) || validMaxSymbols(description)){ 
+      descriptionValidationText.classList.add("valid");
+      descriptionValidationText.classList.remove("invalid");
+  }
+
+  if(!validMinWords(description) || !validMaxSymbols(description)) {
+      descriptionValidationText.classList.add("invalid");
+      result = false;
+  } 
+  if(emptyInput(description)) {
+      descriptionValidationText.classList.remove("invalid");
+      descriptionValidationText.classList.remove("valid");
+  }
+
+  return result;
+}
+
+inputTitle.addEventListener("input", checkTitleValidation);
+taskDescription.addEventListener("input", checkDescriptionValidation);
+
+
+
+const statusSelect = document.querySelector(".statuses-container");
+const priorityContainer = document.querySelector(".dropdown-btn-prior");
+const taskdepartmentContainer = document.querySelector(".department-container");
+const employeeContainer = document.querySelector(".dropdown-btn-employee");
+
+
+
+const checkTaskDropdownsValidation = function() {
+  let result = true;
+  
+  const statusValue = statusSelect.value;
+  const priorityValue = priorityContainer.textContent;
+  const departmentValue = taskdepartmentContainer.value;
+  const employeeValue = employeeContainer.textContent;
+  const dateInput = dataInput.value;
+
+   console.log(statusValue);
+
+    if(emptyInput(statusValue)) {
+        statusSelect.classList.add("validInput");
+        statusSelect.classList.remove("invalidInput");
+    } else{
+      statusSelect.classList.add("invalidInput");
+      statusSelect.classList.remove("validInput");
+      result = false;
+    }
+    if(emptyInput(priorityValue)) {
+        priorityContainer.classList.add("validInput");
+        priorityContainer.classList.remove("invalidInput");
+    } else{
+      priorityContainer.classList.add("invalidInput");
+      priorityContainer.classList.remove("validInput");
+      result = false;
+
+    }
+    if(emptyInput(departmentValue)) {
+        taskdepartmentContainer.classList.add("validInput");
+        taskdepartmentContainer.classList.remove("invalidInput");
+    } else{
+      taskdepartmentContainer.classList.add("invalidInput");
+      taskdepartmentContainer.classList.remove("validInput");
+      result = false;
+    }
+    if(emptyInput(employeeValue)) {
+        employeeContainer.classList.add("validInput");
+        employeeContainer.classList.remove("invalidInput");
+    } else{
+      employeeContainer.classList.add("invalidInput");
+      employeeContainer.classList.remove("validInput");
+      result = false;
+    }
+    if(emptyInput(dateInput)) {
+      dataInput.classList.add("validInput");
+      dataInput.classList.remove("invalidInput");
+    } else{
+      dataInput.classList.add("invalidInput");
+      dataInput.classList.remove("validInput");
+      result = false;
+    }
+
+
+
+
+    return result;
+};
+
+
+
+
+
 //////////////////////////////////////////
 /////////////////////////////////////////
 /////////////////////////////////////////
@@ -225,11 +379,12 @@ const sendJson = async function(url, uploadData) {
   const uploadData = async function(e) {
     e.preventDefault();
 
-    /*const validTitle = checkTitleValidation(); 
+    const validTitle = checkTitleValidation(); 
     const validDescription = checkDescriptionValidation();
     const validDropdown = checkTaskDropdownsValidation();
     
-    if(!validTitle && !validDescription && !validDropdown) return;*/
+    
+    if(!validTitle && !validDescription && !validDropdown) return;
 
     const dataArr = [...new FormData(formCreateTask)];
     const data = Object.fromEntries(dataArr);
@@ -252,6 +407,7 @@ const sendJson = async function(url, uploadData) {
     console.log(formData);
     const datas = await sendJson("https://momentum.redberryinternship.ge/api/tasks",formData);
     console.log(datas);
+    window.location.href = "../index.html";
   };
   formCreateTask.addEventListener("submit",uploadData);
 

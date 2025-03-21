@@ -15,8 +15,10 @@
     <header>
       <div class="header-container">
         <div class="image-container">
-          <img src="../assets/images/Momentum.png" alt="Momentum logo" />
-          <img src="../assets/images/Hourglass.png" alt="image of hourglass" />
+          <a href="../index.html">
+            <img src="../assets/images/Momentum.png" alt="Momentum logo" />
+            <img src="../assets/images/Hourglass.png" alt="image of hourglass" />
+          </a>
         </div>
         <nav>
           <ul class="main-nav-list">
@@ -37,15 +39,15 @@
             <div class="header-container">
               <div class="categ-dep-container">
                 <div class="task-category">
-                    <img src="../assets/images/Medium.png"/>
-                    <p>საშუალო</p>
+                  <img class="task-category-icon" src="../assets/images/Medium.png"/>
+                  <p class="task-category-text">საშუალო</p>
                 </div>
-                <div class="department">დიზიანი</div>
+                <div class="task-department-btn department">დიზიანი</div>
               </div>
-              <h2>redberry-ს საიტის ლისტინგის დიზიანი</h2>
+              <h2 class="task-heading">redberry-ს საიტის ლისტინგის დიზიანი</h2>
             </div>
             <div>
-              <p>შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
+              <p class="task-description">შექმენი საიტის მთავარი გვერდი, რომელიც მოიცავს მთავარ 
                   სექციებს და ნავიგაციას
               </p>
             </div>
@@ -53,19 +55,19 @@
           <div class="details-content">
             <p class="heading-details">დავალების დეტალები</p>
             <div class="container status-container">
-                <div class="icon-text-container">
-                    <img src="../assets/icons/pie-chart.png" alt="pie-chart icon"/>
-                    <p>სტატუსი</p>
-                </div>
-                <div>
-                    <select
-                        class="select statuses-container"
-                        name="status"
-                        id="select-status3"
-                    >
-                    <option> </option>
-                    </select>
-                </div>                       
+              <div class="icon-text-container">
+                  <img src="../assets/icons/pie-chart.png" alt="pie-chart icon"/>
+                  <p>სტატუსი</p>
+              </div>
+              <form>
+                <select
+                    class="select statuses-container"
+                    name="status"
+                    id="select-status3"
+                >
+                <option> </option>
+                </select>
+              </form>                       
             </div>
             <div class="container">
               <div class="icon-text-container">
@@ -73,12 +75,12 @@
                   <p>თანამშრომელი</p>
               </div>
               <div class="employee-info-container">
-                  <img src="../assets/images/customer-2.jpg" alt="responsible employee image"/>
-                  <div>
-                      <p>დეპარტამენტი</p>
-                      <p>ანი არაბული</p>
-                  </div>
+                <img class="task-employee-image" src="../assets/images/customer-2.jpg" alt="responsible employee image"/>
+                <div>
+                  <p class="task-department">დეპარტამენტი</p>
+                  <p class="task-employee">ანი არაბული</p>
                 </div>
+              </div>
             </div>
             <div class="container">
               <div class="icon-text-container">
@@ -93,11 +95,13 @@
         </div>
 
       </section>
+      <section></section>
       
     </main>
     
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
-    <script src="../js/createTask.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/detailedTask.js"></script>
   </body>
 </html>

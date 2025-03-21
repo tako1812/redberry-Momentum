@@ -6,6 +6,7 @@ const previewConatiner = document.querySelector(".image-preview-container");
 const imagePreview = document.querySelector(".image-preview--image");
 const defaultTextImage = document.querySelector(".default-text-image");
 
+imagePreview.style.display = "none";
 inputFile.addEventListener("change", function() {
     const file = this.files[0];
     console.log(file);
@@ -21,8 +22,7 @@ inputFile.addEventListener("change", function() {
         })
         reader.readAsDataURL(file);
     }
-
-})
+});
 //////////////////////////////////////////
 //  toggle modal window
 const btnAddEmployee = document.querySelector(".btn-add-employee");
@@ -62,8 +62,113 @@ const departmentsContainer = document.querySelector(".departments-container");
     });
   };
   renderDepartments();
-  ////////////////////////////////////////////
-  ///////////////////////////////////////////
+  
+  /////////////////////////////////////////////
+  // VALIDATIONS
+
+  const inputName = document.querySelector(".form-input-name");
+const nameValidationText = document.querySelector(".name-validation-text")
+const inputSurname = document.querySelector(".form-input-surname");
+const surnameValidationText = document.querySelector(".surname-validation-text")
+
+
+
+const checkSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
+const emptyInput = (inputs) => inputs.trim() !== "";
+const validMinWords = (inputs) => inputs.trim().split(" ").length > 4;
+const validMaxSymbols = (input) => input.trim().length <= 255;
+
+
+const checkNameValidation = function() {
+    let result = true;
+    let nameValue = inputName.value;
+
+    if(checkSymbols(nameValue)){ 
+        nameValidationText.classList.add("valid");
+        nameValidationText.classList.remove("invalid");
+    }
+    if(!checkSymbols(nameValue)) {
+        nameValidationText.classList.add("invalid");
+        result = false;
+    } 
+    console.log(2222);
+    return result;
+}
+
+
+const checkSurnameValidation = function() {
+    let result = true;
+    let surnameValue = inputSurname.value;
+
+    if(checkSymbols(surnameValue)){ 
+        surnameValidationText.classList.add("valid");
+        surnameValidationText.classList.remove("invalid");
+    }
+    if(!checkSymbols(surnameValue)) {
+        surnameValidationText.classList.add("invalid");
+        result = false;
+    } 
+    return result;
+}
+
+inputName.addEventListener("input", checkNameValidation);
+inputSurname.addEventListener("input", checkSurnameValidation);
+
+/////////////////////////////////
+////////////////////////////////////////////////////
+/////////////////////////////////////////////////
+//////////////////////////////////////////
+//////////////////////////////////////////////////////
+//// EMPOYEE DROPDOWNS
+const fileEmployee = document.querySelector(".image-upload");
+const imageContainer = document.querySelector(".uploadImg-container");
+
+const employeeDepartments = document.querySelector(".employee-departments");
+
+
+const checkCreateEmpValidation = function() {
+    const selectedEmployeeDepartments = employeeDepartments.value;
+    const fileValue = fileEmployee.files;
+    console.log(selectedEmployeeDepartments);
+    console.log(fileValue);
+    let result = true;
+    if(fileValue.length > 0) {
+        imageContainer.classList.add("validInput");
+        imageContainer.classList.remove("invalidInput");
+    }else{
+        imageContainer.classList.add("invalidInput");
+        imageContainer.classList.remove("validInput");
+    }
+
+    if(emptyInput(selectedEmployeeDepartments)){
+        employeeDepartments.classList.add("validInput");
+        employeeDepartments.classList.remove("invalidInput");
+
+    }else{
+        employeeDepartments.classList.add("invalidInput");
+        employeeDepartments.classList.remove("validInput");
+        result = false;
+    }
+    return result;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /////////////////////////////////////////
   //  POST REQUEST OF ADD EPLOYEE
   //

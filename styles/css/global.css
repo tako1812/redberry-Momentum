@@ -195,6 +195,7 @@ header .header-container nav ul {
   list-style: none;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
 }
 header .header-container nav ul li a:link,
@@ -203,10 +204,7 @@ header .header-container nav ul li a:visited {
   text-decoration: none;
   font-size: 1.4rem;
   padding: 1.2rem 1.8em;
-  /*
-  &:nth-child(1){
-    color:black;
-  }*/
+  border-radius: 4px;
 }
 header .header-container nav ul li a:link:last-child,
 header .header-container nav ul li a:visited:last-child {
@@ -233,7 +231,8 @@ header .header-container nav ul li a:visited:last-child:hover {
   gap: 2rem;
 }
 .section-filters .filters-container h2 {
-  font-size: 4.4rem;
+  font-size: 2rem;
+  font-weight: 700;
 }
 .section-filters .filters-container .filters-box {
   max-width: 45em;
@@ -242,7 +241,7 @@ header .header-container nav ul li a:visited:last-child:hover {
   gap: 4rem;
   border: 1px solid #DEE2E6;
   border-radius: 9px;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.2rem;
 }
 .section-filters .filters-container .filters-box .btn-filter {
   display: flex;
@@ -289,9 +288,12 @@ header .header-container nav ul li a:visited:last-child:hover {
   align-self: self-end;
 }
 .section-filters .filters-container .filters-box .multiple-selector-container .employee-img {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 1.9rem;
+  height: 1.9rem;
   border-radius: 9px;
+}
+.section-filters .filters-container .filters-box .multiple-selector-container label {
+  font-size: 1rem;
 }
 .section-filters .filters-container .filters-box .arrow-icon {
   width: 1.7rem;
@@ -372,6 +374,7 @@ header .header-container nav ul li a:visited:last-child:hover {
   background-color: #FF006E;
   display: flex;
   gap: 0.2rem;
+  width: 28rem;
 }
 .section-tasks .tasks-container .taskCard-container .status-readyForTesting .task-card {
   border: 1px solid #FF006E;
@@ -429,7 +432,12 @@ header .header-container nav ul li a:visited:last-child:hover {
   gap: 0.5rem;
 }
 .section-tasks .tasks-container .taskCard-container .task-card .task-card-description h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.section-tasks .tasks-container .taskCard-container .task-card .task-card-description p {
+  font-size: 1rem;
+  line-height: 1;
 }
 .section-tasks .tasks-container .taskCard-container .task-card .task-card-employee {
   display: flex;
@@ -465,7 +473,7 @@ header .header-container nav ul li a:visited:last-child:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80rem;
-  height: 55rem;
+  height: 60rem;
   background-color: #fff;
   border-radius: 9px;
   padding: 5rem 4rem;
@@ -479,7 +487,9 @@ header .header-container nav ul li a:visited:last-child:hover {
 }
 .add-employee-window h2 {
   font-size: 2rem;
+  font-weight: 700;
   text-align: center;
+  margin-bottom: 2rem;
 }
 .add-employee-window form .employee-info-container {
   display: flex;
@@ -582,6 +592,7 @@ html {
 
 body {
   font-family: "FiraGO", sans-serif;
+  background-color: #fff;
 }
 
 .btn, .btn:link, .btn:visited {
@@ -589,6 +600,10 @@ body {
   background: none;
   border: none;
   cursor: pointer;
+}
+.btn-filter {
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 .btn-filter:hover {
   color: #8338EC;
@@ -611,63 +626,82 @@ body {
   color: #fff;
   align-self: flex-end;
 }
-
-.test {
-  padding: 5rem;
+.btn-add-employee {
+  border: 2.3px solid #8338EC;
+  padding: 1.2rem 2rem;
+  background-color: #fff;
+  border-radius: 4px;
 }
-.test .create-task-container {
+.btn-add-employee:hover {
+  border-color: #B588F4;
+}
+
+.section-create-task {
+  padding: 5rem;
+  background-color: #fff;
+}
+.section-create-task .create-task-container {
   max-width: 120rem;
   padding: 0 3.2rem;
   margin: 0 auto;
-  background-color: #fff;
 }
-.test .create-task-container form {
+.section-create-task .create-task-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+.section-create-task .create-task-container .form {
   max-width: 100%;
   height: 50rem;
   background-color: #FBF9FF;
-  padding: 1rem 3rem;
+  padding: 3rem;
+  border-radius: 4px;
 }
-.test .create-task-container form .grids-container {
+.section-create-task .create-task-container .form .grids-container {
   display: flex;
   flex-direction: column;
   gap: 5rem;
 }
-.test .create-task-container form .grids-container .grid-container {
+.section-create-task .create-task-container .form .grids-container .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
 }
-.test .create-task-container form .grids-container .grid-container label {
+.section-create-task .create-task-container .form .grids-container .grid-container label {
   display: block;
   font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-.test .create-task-container form .grids-container .grid-container .input,
-.test .create-task-container form .grids-container .grid-container .select {
+.section-create-task .create-task-container .form .grids-container .grid-container .input,
+.section-create-task .create-task-container .form .grids-container .grid-container .select {
   width: 100%;
   padding: 1rem;
   border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
   border-radius: 9px;
 }
-.test .create-task-container form .grids-container .grid-container .textarea {
+.section-create-task .create-task-container .form .grids-container .grid-container .textarea {
   width: 100%;
   border: 2.5px solid rgba(128, 138, 147, 0.4392156863);
   border-radius: 9px;
   padding: 2rem;
   resize: none;
 }
-.test .create-task-container form .grids-container .grid-container .priority-status-container {
+.section-create-task .create-task-container .form .grids-container .grid-container .priority-status-container {
   display: flex;
 }
-.test .create-task-container form .grids-container .grid-container .priority-status-container p {
+.section-create-task .create-task-container .form .grids-container .grid-container .priority-status-container p {
   display: block;
 }
-.test .create-task-container form .grids-container .grid-container .priority-status-container div {
+.section-create-task .create-task-container .form .grids-container .grid-container .priority-status-container div {
   width: 100%;
 }
-.test .create-task-container form .grids-container .btn-createTask-box {
+.section-create-task .create-task-container .form .grids-container .btn-createTask-box {
   align-self: flex-end;
+}
+.section-create-task .create-task-container .form .grids-container .validation-text p {
+  color: #D9D9D9;
+  font-size: 1.1rem;
 }
 
 .dropdown-container {
@@ -720,6 +754,21 @@ body {
   width: 100%;
   height: 18rem;
 }
+.dropdown-container .dropdown .dropdown-content-employees img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 15px;
+}
+.dropdown-container .dropdown .dropdown-content-employees p {
+  font-size: 1.2rem;
+}
+.dropdown-container .dropdown .dropdown-content-priorities img {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.dropdown-container .dropdown .dropdown-content-priorities p {
+  font-size: 1.2rem;
+}
 .dropdown-container .dropdown .default {
   display: flex;
   align-items: center;
@@ -727,8 +776,9 @@ body {
   margin-left: 1rem;
 }
 .dropdown-container .dropdown .default img {
-  width: 1.2rem;
-  height: 1.2rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 15px;
 }
 .dropdown-container .dropdown .default p {
   font-size: 1.2rem;
@@ -739,11 +789,11 @@ body {
 }
 
 .validInput {
-  border: 1px solid green;
+  border: 2.5px solid rgba(0, 128, 0, 0.7) !important;
 }
 
 .invalidInput {
-  border: 1px solid red;
+  border: 2.5px solid red !important;
 }
 
 .detailed-section {
@@ -772,6 +822,7 @@ body {
 }
 .detailed-section .taskDetaild-container .main-content .header-container .categ-dep-container .task-category {
   padding: 0.3rem 0.8rem;
+  border-color: #F7BC30;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -787,10 +838,6 @@ body {
 .detailed-section .taskDetaild-container .main-content .header-container h2 {
   font-size: 2rem;
   font-weight: 700;
-}
-.detailed-section .taskDetaild-container .main-content p {
-  font-size: 1.2rem;
-  font-weight: 500;
 }
 .detailed-section .taskDetaild-container .details-content {
   display: flex;
@@ -821,15 +868,15 @@ body {
   border-radius: 5px;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container {
-  align-self: flex-start;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 1rem;
+  padding-right: 5rem;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container img {
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 15px;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container div {
@@ -837,6 +884,14 @@ body {
   flex-direction: column;
   gap: 0.5rem;
 }
+.detailed-section .taskDetaild-container .details-content .employee-info-container .task-employee {
+  font-weight: 600;
+}
 .detailed-section .taskDetaild-container .details-content .deadline-date {
   align-self: center;
+}
+.detailed-section .taskDetaild-container p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #474747;
 }/*# sourceMappingURL=global.css.map */

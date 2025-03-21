@@ -24,6 +24,7 @@
 }
 .detailed-section .taskDetaild-container .main-content .header-container .categ-dep-container .task-category {
   padding: 0.3rem 0.8rem;
+  border-color: #F7BC30;
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -40,10 +41,6 @@
   font-size: 2rem;
   font-weight: 700;
 }
-.detailed-section .taskDetaild-container .main-content p {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
 .detailed-section .taskDetaild-container .details-content {
   display: flex;
   flex-direction: column;
@@ -55,9 +52,8 @@
 }
 .detailed-section .taskDetaild-container .details-content .container {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 15rem;
+  align-items: center;
+  justify-content: center;
 }
 .detailed-section .taskDetaild-container .details-content .icon-text-container {
   display: flex;
@@ -73,15 +69,14 @@
   border-radius: 5px;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container {
-  align-self: flex-start;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container img {
-  width: 3rem;
-  height: 3rem;
+  width: 3.5rem;
+  height: 3.5rem;
   border-radius: 15px;
 }
 .detailed-section .taskDetaild-container .details-content .employee-info-container div {
@@ -89,6 +84,14 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+.detailed-section .taskDetaild-container .details-content .employee-info-container .task-employee {
+  font-weight: 600;
+}
 .detailed-section .taskDetaild-container .details-content .deadline-date {
   align-self: center;
+}
+.detailed-section .taskDetaild-container p {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #474747;
 }/*# sourceMappingURL=detailedTask.css.map */

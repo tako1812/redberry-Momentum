@@ -1,5 +1,6 @@
 header {
   @include container;
+  
 
   .header-container {
     margin-top: 2rem;      
@@ -11,6 +12,7 @@ header {
         list-style: none;
         display: flex;
         align-items: center;
+        justify-content: center;
         gap:2rem;
   
         li {
@@ -20,11 +22,7 @@ header {
             text-decoration: none;
             font-size:1.4rem;
             padding: 1.2rem 1.8em;
-
-            /*
-            &:nth-child(1){
-              color:black;
-            }*/
+            border-radius: 4px;
 
             &:last-child{
               display:flex;

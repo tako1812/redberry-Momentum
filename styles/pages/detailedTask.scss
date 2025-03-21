@@ -24,6 +24,7 @@
 
                     .task-category{
                         padding:0.3rem 0.8rem;
+                        border-color: #F7BC30;
                         border-radius:4px;
                         display:flex;
                         align-items: center;
@@ -43,10 +44,7 @@
                 }
 
             }
-            p{
-                font-size: 1.2rem;
-                font-weight: 500;
-            }
+            
         }
         .details-content{
             display:flex;
@@ -61,9 +59,9 @@
 
             .container{
                 display:flex;
-                align-items: flex-start;
-                justify-content: flex-start;
-                gap:15rem;
+                align-items: center;
+                justify-content: center;
+                //gap:15rem;
             }
             .icon-text-container{
                 display:flex;
@@ -84,15 +82,14 @@
             }
             
             .employee-info-container {
-                align-self: flex-start;
                 display:flex;
                 align-items: center;
                 justify-content: center;
                 gap:1rem;
 
                 img{
-                    width:3rem;
-                    height:3rem;
+                    width:3.5rem;
+                    height:3.5rem;
                     border-radius: 15px;
                 }
                 div{
@@ -100,11 +97,19 @@
                     flex-direction: column;
                     gap:0.5rem;
                 }
+                .task-employee{
+                    font-weight: 600;
+                }
             }
             .deadline-date{
                 align-self: center;
             }
 
+        }
+        p{
+            font-size: 1.4rem;
+            font-weight: 500;
+            color:#474747;
         }
     }
 }

@@ -227,119 +227,7 @@ filtersBox.addEventListener("click",  renderUserInputsBtns);
 ///////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////
-/// ADD EMPLOYEE
-// preview image
-/*
-const inputFile = document.querySelector(".image-upload");
-const previewConatiner = document.querySelector(".image-preview-container");
-const imagePreview = document.querySelector(".image-preview--image");
-const defaultTextImage = document.querySelector(".default-text-image");
 
-inputFile.addEventListener("change", function() {
-    const file = this.files[0];
-    console.log(file);
-
-    if(file) {
-        const reader = new FileReader();
-
-        defaultTextImage.style.display = "none";
-        imagePreview.style.display ="block";
-
-        reader.addEventListener("load", function(){
-            imagePreview.setAttribute("src", this.result);
-        })
-        reader.readAsDataURL(file);
-    }
-
-})
-//////////////////////////////////////////
-//  toggle modal window
-const btnAddEmployee = document.querySelector(".btn-add-employee");
-const addEmployeeWindow = document.querySelector(".add-employee-window");
-const overlay = document.querySelector(".overlay");
-const cancelbtn = document.querySelector(".cancel-icon");
-
-const toggleModalWindow = function() {
-    addEmployeeWindow.classList.toggle("hidden");
-    overlay.classList.toggle("hidden");
-};
-
-[cancelbtn, overlay, btnAddEmployee].forEach((el) => 
-    el.addEventListener("click", toggleModalWindow));
-/////////////////////////////////////////////
-///////////////////////////////////////////
-const departmentsContainer = document.querySelector(".departments-container");
-  
-const renderDepartments = async function () {
-    departmentsContainer.innerHTML = "";
-    const res = await fetch(
-        "https://momentum.redberryinternship.ge/api/departments"
-    );
-    const datas = await res.json();
-    console.log(datas);
-    departments = datas;
-
-    datas.map(data => {
-        const html = `
-        <option value="${data.id}">${data.name}</option>
-        `;
-        departmentsContainer.insertAdjacentHTML("afterbegin", html);
-    });
-};
-renderDepartments();
-  ////////////////////////////////////////////
-  ///////////////////////////////////////////
-  /////////////////////////////////////////
-  //  POST REQUEST OF ADD EPLOYEE
-  //
-const addEmployeeFormContainer = document.querySelector(".add-employee-form");
-const btnAddEmplayee = document.querySelector(".btn-add-imployee");
-
-const sendJson = async function(url, uploadData) {
-    try{
-        const fetchData = await fetch(url,{
-            method:"POST",
-            headers:{
-                Authorization: `Bearer ${token}`,
-                accept:"application/json",
-            },
-            body: uploadData,
-        }
-       );
-        const data = await fetchData.json();
-        return data;
-    }catch (err){
-        throw err;
-    }
-};
-
-  
-const uploadData = async function(e) {
-    e.preventDefault();
-
-    const dataArr = [...new FormData(addEmployeeFormContainer)];
-    const data = Object.fromEntries(dataArr);
-    console.log(data);
-
-    const employeeData = {
-        name: data.name,
-        surname: data.surname, 
-        avatar:data.avatar, 
-        department_id: data.department
-    };
-
-    const formData = new FormData();
-
-    formData.append("name", employeeData.name);
-    formData.append("surname", employeeData.surname);
-    formData.append("avatar", employeeData.avatar);
-    formData.append("department_id", employeeData.department_id);
-
-    console.log(formData);
-    const datas = await sendJson("https://momentum.redberryinternship.ge/api/employees",formData);
-    console.log(datas);
-};
-addEmployeeFormContainer.addEventListener("submit",uploadData);*/
 
   /////////////////////////////////////////////////////
   ///////////////////////////////////////////////////
@@ -368,30 +256,18 @@ const renderTaskCards = async function () {
     console.log(datas);
     tasksData = datas;
     createCard(tasksData);
-
-    /*
-    const departments = datas.map(data => {
-         data.department.name;
-    });
-    const departmentCategories = [...new Set(departments)];
-    console.log(departmentCategories);
-
-    str.split(" ").map(word => word.slice(0, 3));
-   }
-    
-    */
     
 };
 renderTaskCards();
 /////////////////////////////////////////////
 
 
-const shorten = function(data) {
+const shortenDepartmentsName = function(data) {
   if (data.length > 1) {
     const datas = data.split(" ");
     
     
-    const sliced = datas.map(each => each.slice(0, 3));
+    const sliced = datas.map(each => each.slice(0, 4));
   
     const shortend = sliced.join(".");
     return shortend;
@@ -408,6 +284,47 @@ const shorten = function(data) {
 //////////////////////////////////////////////////
 // CREATE CARD
 const createCard = function (datas) {
+       /*
+    const getRandomColor = () => {
+    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+    };
+    const sss = datas.map(data => {
+      return data.department.name;
+    });
+    console.log(sss);
+    const deps = new Set(sss);
+    console.log(deps);
+    const result = deps.forEach(dep => {
+      dep.style.backgroundColor = getRandomColor();
+    });
+    console.log(result);*/
+     /*
+    const setBackColor = function(department){
+         if(department === "ფინანსური დეპარტამენტი") {
+          department.style.color = " #F7BC30";
+         }
+         if(department === "ადმინისტრაციული დეპარტამენტი") {
+          department.style.color =" #FB5607;";
+        }
+        if(department === "მედიის დეპარტამენტი") {
+          department.style.color = " #FF006E;";
+        }
+        if(department === "ტექნოლოგიების დეპარტამენტი") {
+          department.style.color = " #3A86FF;";
+        }
+        if(department === "ადამიანური რესურსების დეპარტამენტი") {
+          department.style.color = " #8338EC;";
+        }
+        if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
+          department.style.color = " #8338EC;";
+        }
+        if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
+          department.style.color = " #B588F4;";
+        }
+
+    };*/
+
+
     datas.map(data =>{
         let html = `
         <div class="task-card" dataset = ${data.id}>
@@ -417,7 +334,7 @@ const createCard = function (datas) {
                         <img src="${data.priority.icon}"/>
                         <p>${data.priority.name}</p>
                     </div>
-                    <div class="department">${data.department.name ? shorten(data.department.name) : data.department.name}</div>
+                    <div class="department">${data.department.name ? shortenDepartmentsName(data.department.name) : data.department.name}</div>
                 </div>
                 <p>22 იანვ, 2022</p>
             </div>
@@ -507,11 +424,12 @@ function filterTasks() {
 const userSelectionsContainer = document.querySelector(
   ".user-inputs-container"
 );
+const departmentsSelections =document.querySelectorAll(".user-input-department"); 
 userSelectionsContainer.addEventListener("click", function (e) {
   const clicked = e.target.closest(".close-icon");
   const clickedText = clicked.previousElementSibling.textContent;
   console.log(clickedText);
-  
+    
 
   if (!clicked) return;
   console.log(clicked);
@@ -531,7 +449,10 @@ userSelectionsContainer.addEventListener("click", function (e) {
   if(clickedText === selectedEmployee) {
     selectedEmployee = null;
   }
-
+   
+  document.querySelectorAll('[type="checkbox"]').forEach((item) => {
+    item.checked = false;
+  });
   filterTasks();
 });
 ///////////////////////////////////////////////////////////
@@ -551,9 +472,9 @@ btnClear.addEventListener("click", function () {
   btnClear.classList.add("hidden");
   filterTasks();
 
-  /*document.querySelectorAll('[type="checkbox"]').forEach((item) => {
+  document.querySelectorAll('[type="checkbox"]').forEach((item) => {
     item.checked = false;
-  });*/
+  });
 });
 
 

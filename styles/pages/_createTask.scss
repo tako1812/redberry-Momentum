@@ -1,15 +1,21 @@
-.test{
+.section-create-task{
     padding:5rem;
+    background-color: #fff;
   
     .create-task-container{
       @include container;
-      background-color: #fff;
+
+      h2{
+        @include heading-primary;
+        margin-bottom: 2rem;
+      }
   
-        form{
+        .form{
         max-width: 100%;
         height: 50rem;
         background-color: #FBF9FF;
-        padding:1rem 3rem;
+        padding:3rem;
+        border-radius: 4px;
 
             .grids-container{
                 display:flex;
@@ -53,9 +59,16 @@
                         }
                     }
                 }
-
+                
                 .btn-createTask-box{
                     align-self: flex-end;
+                    
+                }
+                .validation-text{
+                    p{
+                        color:$form-text-color;
+                        font-size: 1.1rem;
+                    }
 
                 }
             }
@@ -120,22 +133,37 @@
         .dropdown-content-employees{
             width:100%;
             height:18rem;
-
+            img{
+                width:2rem;
+                height:2rem;
+                border-radius: 15px;
+            }
+            p{
+                font-size:1.2rem;
+            }
+        }
+        .dropdown-content-priorities{
+            img{
+                width:1.5rem;
+                height:1.5rem;
+            }
+            p{
+                font-size:1.2rem;
+            }
         }
 
-    
         .default{
             display:flex;
             align-items: center;
             gap:0.5rem;
             margin-left: 1rem;
             img{
-                width:1.2rem;
-                height:1.2rem;
+                width:1.8rem;
+                height:1.8rem;
+                border-radius: 15px;
             }
             p{
                 font-size:1.2rem;
-
             }
             
         }
@@ -146,9 +174,9 @@
     display:none;
 }
 .validInput{
-    border: 1px solid green;
+    border: 2.5px solid rgba(0, 128, 0, 0.7) !important;
 }
 .invalidInput{
-    border: 1px solid red;
+    border: 2.5px solid red !important;
 }
 

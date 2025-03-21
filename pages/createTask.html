@@ -15,8 +15,10 @@
     <header>
       <div class="header-container">
         <div class="image-container">
-          <img src="../assets/images/Momentum.png" alt="Momentum logo" />
-          <img src="../assets/images/Hourglass.png" alt="image of hourglass" />
+          <a href="../index.html">
+            <img src="../assets/images/Momentum.png" alt="Momentum logo" />
+            <img src="../assets/images/Hourglass.png" alt="image of hourglass" />
+          </a>
         </div>
         <nav>
           <ul class="main-nav-list">
@@ -31,10 +33,10 @@
       </div>
     </header>
     <main>
-      <section class="test">
+      <section class="section-create-task">
         <div class="create-task-container">
           <h2>შექმენი ახალი დავალება</h2>
-          <form class="form-create-task">
+          <form class="form form-create-task">
             <div class="grids-container">
               <div class="grid-container">
                 <div>
@@ -45,7 +47,7 @@
                     type="text"
                     name="title"
                   />
-                  <div class="title-validation-text">
+                  <div class="validation-text title-validation-text">
                     <p>
                       მინიმუმ 2 სიმბოლო
                     </p>
@@ -77,7 +79,7 @@
                     minlength="2"
                     maxlength="255"
                   ></textarea>
-                  <div class="description-validation-text">
+                  <div class="validation-text description-validation-text">
                     <p>
                       მინიმუმ 4 სიტყვა
                     </p>
@@ -134,8 +136,6 @@
                       </div>
                     </div>
                   </div>
-
-
                   <div>
                     <label for="select-status">სტატუსი*</label>
                     <select
@@ -170,6 +170,5 @@
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="../js/createTask.js"></script>
-    <!--<script src="../js/validations.js"></script>-->
   </body>
 </html>

@@ -1,13 +1,29 @@
 "use strict";
+const token = "9e73c158-43ef-4fd6-9f0e-70385f360191";
+let departments =[];
+
 const filtersBox = document.querySelector(".filters-box");
 const btnClear = document.querySelector(".btn-clear");
-let departments =[];
-const token = "9e73c158-43ef-4fd6-9f0e-70385f360191";
+const departmentContainer = document.querySelector(".filter-department-container");
+const filterPrioritiesContainer = document.querySelector(".fiter-priorities-container");
+const filterEmployeesContainer = document.querySelector(".filter-employees-container");
+
+const departmentsSelector= document.querySelector(".selector-department"); 
+const prioritiesSelector= document.querySelector(".selector-priority");
+const employeesSelector= document.querySelector(".selector-employee");  
+
+const selectionsContainer = document.querySelector(".selections-container");
+const statusGoingStartContainer = document.querySelector(".status-goingStart-card");
+const statusInProgressContainer = document.querySelector(".status-inProgress-card");
+const statusReadyForTestingContainer = document.querySelector(".status-readyForTesting-card");
+const statusFinishedContainer = document.querySelector(".status-finished-card");
+const userSelectionsContainer = document.querySelector(".user-inputs-container");
+
 
 
 //////////////////////////////////////
 //  toggle filter's containers
-//
+
 const toggleFiltersContainers = function(e) {
     const clicked = e.target.closest(".btn-filter");
     if(!clicked) return;
@@ -16,12 +32,10 @@ const toggleFiltersContainers = function(e) {
     document.querySelector(`.filter-selector-${data}`).classList.toggle("hidden");
 }
 filtersBox.addEventListener("click", toggleFiltersContainers);
-///
-///
-///
+
 //////////////////////////////////////
 //  hide filter's containers
-//
+
 const hideFilterContainer = function(e) {
     const clicked = e.target.closest(".btn-choose");
     if(!clicked) return;
@@ -32,9 +46,8 @@ const hideFilterContainer = function(e) {
 filtersBox.addEventListener("click", hideFilterContainer);
 
 /////////////////////////////////////////////////////
-///
-const departmentContainer = document.querySelector(".filter-department-container");
-  
+/// RENDER FILTER CATEGORIES
+
 const renderFilterDepartment = async function () {
     departmentContainer.innerHTML = "";
     const res = await fetch(
@@ -62,10 +75,8 @@ const renderFilterDepartment = async function () {
     });
   };
   renderFilterDepartment();
-///////////////////////////////////////////
-//////////////////////////////////////////
 
-const filterPrioritiesContainer = document.querySelector(".fiter-priorities-container");
+
 const renderFilterPriorities = async function () {
     filterPrioritiesContainer.innerHTML = "";
     const res = await fetch(
@@ -93,16 +104,6 @@ const renderFilterPriorities = async function () {
   renderFilterPriorities();
 
 
-
-
-
-
-
-
-//////////////////////////////////////////
-/////////////////////////////////////////
-///
-const filterEmployeesContainer = document.querySelector(".filter-employees-container");
 const renderFilterEmployees = async function () {
     filterEmployeesContainer.innerHTML = "";
     
@@ -139,13 +140,11 @@ const renderFilterEmployees = async function () {
 
 };
 renderFilterEmployees();
+
+
 //////////////////////////////////////////////////
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-////////////////////////////////////////////////
-const departmentsSelector= document.querySelector(".selector-department"); 
-const prioritiesSelector= document.querySelector(".selector-priority");
-const employeesSelector= document.querySelector(".selector-employee");  
+// GET SELECTED DATA FROM FILTERS
+
 let selectedDepartments = [];
 let selectedPriorities = [];
 let selectedEmployee;
@@ -178,10 +177,9 @@ filterEmployeesContainer.addEventListener("click",makeSingleSelection);
 departmentsSelector. addEventListener("click", getUserInput.bind(selectedDepartments));
 prioritiesSelector.addEventListener("click", getUserInput.bind(selectedPriorities));
 
-///////////////////////////////////////
-//////////////////////////////////////
-///
-const selectionsContainer = document.querySelector(".selections-container");
+///////////////////////////////////////////////
+//  RENDER BUTTONS FROM SELECTED CHECKBOX
+
 selectionsContainer.innerHTML = "";
 const renderUserInputsBtns = function(e) {
     const clicked = e.target.closest(".btn-choose");
@@ -221,25 +219,14 @@ const renderUserInputsBtns = function(e) {
   selectionsContainer.innerHTML = html;
 
    filterTasks();
-  
 }
 filtersBox.addEventListener("click",  renderUserInputsBtns);
-///////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////
 
 
-  /////////////////////////////////////////////////////
-  ///////////////////////////////////////////////////
-  //GET CARDS DATA
-  //
-  const statusGoingStartContainer = document.querySelector(".status-goingStart-card");
-  const statusInProgressContainer = document.querySelector(".status-inProgress-card");
-  const statusReadyForTestingContainer = document.querySelector(".status-readyForTesting-card");
-  const statusFinishedContainer = document.querySelector(".status-finished-card");
+//////////////////////////////////////////////////////////
+//    RENDER TASK CARDS
 
-
-  let tasksData;
+let tasksData;
 const renderTaskCards = async function () {
     
     const res = await fetch(
@@ -259,16 +246,13 @@ const renderTaskCards = async function () {
     
 };
 renderTaskCards();
-/////////////////////////////////////////////
 
 
 const shortenDepartmentsName = function(data) {
   if (data.length > 1) {
     const datas = data.split(" ");
-    
-    
+        
     const sliced = datas.map(each => each.slice(0, 4));
-  
     const shortend = sliced.join(".");
     return shortend;
   }else{
@@ -276,13 +260,18 @@ const shortenDepartmentsName = function(data) {
   }
 };
 
+function formatDeadline(formdate) {
+  const months = ["იანვ", "თებ", "მარ", "აპრ", "მაი", "ივნ", "ივლ", "აგვ", "სექ", "ოქტ", "ნოე", "დეკ"];
+  
+  const date = new Date(formdate);
+  
+  const day = date.getUTCDate();
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+  return `${day} ${month}, ${year}`;
+};
 
 
-
-////////////////////////////////////////////////
-/////////////////////////////////////////////////
-//////////////////////////////////////////////////
-// CREATE CARD
 const createCard = function (datas) {
        /*
     const getRandomColor = () => {
@@ -336,7 +325,7 @@ const createCard = function (datas) {
                     </div>
                     <div class="department">${data.department.name ? shortenDepartmentsName(data.department.name) : data.department.name}</div>
                 </div>
-                <p>22 იანვ, 2022</p>
+                <p>${formatDeadline(data.due_date)}</p>
             </div>
             <div class="task-card-description">
                 <h3>${data.name}</h3>
@@ -377,20 +366,15 @@ const createCard = function (datas) {
 };
 
 //////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
 // FILTER FUNCTIONALITY
-//
+
 function filterTasks() {
     let result = tasksData;
-    console.log(result);
-    console.log(selectedPriorities);
 
     statusGoingStartContainer.innerHTML ="";  
     statusInProgressContainer.innerHTML = "";
     statusReadyForTestingContainer.innerHTML = "";
     statusFinishedContainer.innerHTML = "";
-  
   
     if (selectedDepartments[0]) {
       result = result.filter((task) => {
@@ -415,25 +399,14 @@ function filterTasks() {
     } 
     createCard(result);
 };
-//////////////////////////////////////////////////
-////////////////////////////////////////////////
-///////////////////////////////////////////////
-//
-//  Remove selected inputs
-//
-const userSelectionsContainer = document.querySelector(
-  ".user-inputs-container"
-);
-const departmentsSelections =document.querySelectorAll(".user-input-department"); 
+
+//////////////////////////////////////////////////////
+//  REMOVE SELECTED CATEGORIES // UNCHECK checkbox
+
 userSelectionsContainer.addEventListener("click", function (e) {
   const clicked = e.target.closest(".close-icon");
   const clickedText = clicked.previousElementSibling.textContent;
-  console.log(clickedText);
-    
-
   if (!clicked) return;
-  console.log(clicked);
-  console.log(selectedDepartments);
 
   const filteredItem = clicked.parentElement;
   filteredItem.remove(); 
@@ -441,7 +414,7 @@ userSelectionsContainer.addEventListener("click", function (e) {
   selectedDepartments = selectedDepartments.filter(department => {
     return department !== clickedText
   });
-  console.log(selectedDepartments);
+ 
   selectedPriorities = selectedPriorities.filter(priority => {
     return priority !== clickedText
   });
@@ -455,11 +428,10 @@ userSelectionsContainer.addEventListener("click", function (e) {
   });
   filterTasks();
 });
+
 ///////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////
-/*////////////////////////////////////////*/
-//  Clear button
-//
+//  Clear Button
+
 btnClear.addEventListener("click", function () {
   const selectionsContainer = document.querySelector(".selections-container");
   //filteredInputs.remove();

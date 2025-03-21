@@ -1,10 +1,13 @@
 "use strict";
-/// ADD EMPLOYEE
-// preview image
+
 const inputFile = document.querySelector(".image-upload");
 const previewConatiner = document.querySelector(".image-preview-container");
 const imagePreview = document.querySelector(".image-preview--image");
 const defaultTextImage = document.querySelector(".default-text-image");
+
+const fileEmployee = document.querySelector(".image-upload");
+const imageContainer = document.querySelector(".uploadImg-container");
+const employeeDepartments = document.querySelector(".employee-departments");
 
 imagePreview.style.display = "none";
 inputFile.addEventListener("change", function() {
@@ -114,17 +117,6 @@ const checkSurnameValidation = function() {
 inputName.addEventListener("input", checkNameValidation);
 inputSurname.addEventListener("input", checkSurnameValidation);
 
-/////////////////////////////////
-////////////////////////////////////////////////////
-/////////////////////////////////////////////////
-//////////////////////////////////////////
-//////////////////////////////////////////////////////
-//// EMPOYEE DROPDOWNS
-const fileEmployee = document.querySelector(".image-upload");
-const imageContainer = document.querySelector(".uploadImg-container");
-
-const employeeDepartments = document.querySelector(".employee-departments");
-
 
 const checkCreateEmpValidation = function() {
     const selectedEmployeeDepartments = employeeDepartments.value;
@@ -154,24 +146,9 @@ const checkCreateEmpValidation = function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /////////////////////////////////////////
-  //  POST REQUEST OF ADD EPLOYEE
-  //
+  //////////////////////////////////////////////
+  //  RENDER EPLOYEE
+  
   const addEmployeeFormContainer = document.querySelector(".add-employee-form");
   const btnAddEmplayee = document.querySelector(".btn-add-imployee");
 
@@ -201,20 +178,15 @@ const checkCreateEmpValidation = function() {
     const data = Object.fromEntries(dataArr);
     console.log(data);
 
-
     const validDropdown = checkCreateEmpValidation();
-    
     if(!validDropdown) return;
    
-
-
     const employeeData = {
         name: data.name,
         surname: data.surname, 
         avatar:data.avatar, 
         department_id: data.department
     };
-
     const formData = new FormData();
 
     formData.append("name", employeeData.name);

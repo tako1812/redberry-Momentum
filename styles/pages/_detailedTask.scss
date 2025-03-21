@@ -166,8 +166,21 @@
 
             .comments{
                 display:flex;
+                flex-direction: column;
                 gap:2rem;
-
+                
+                .comment-content{
+                    display:flex;
+                    align-items: center;
+                    gap:1rem;
+                }
+                .author-container{
+                    margin-left: 5rem;
+                }
+                .comment-icon{
+                    margin-left: 5rem;
+                    width:7rem;
+                }
                 .author-image{
                    width:4rem;
                    height:4rem;
@@ -181,9 +194,7 @@
                         display:flex;
                         flex-direction: column;
                         gap:1rem;
-                        .comment-icon{
-                            width:7rem;
-                        }
+                        
                     }
                     .nested-comment-container{
                         display:flex;
@@ -214,6 +225,6 @@
 
     }
 }
-.hidden{
+.displayNone{
     display:none;
 }

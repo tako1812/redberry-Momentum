@@ -64,13 +64,8 @@
                     align-self: flex-end;
                     
                 }
-                .validation-text{
-                    p{
-                        color:$form-text-color;
-                        font-size: 1.1rem;
-                    }
-
-                }
+                
+                
             }
         }
     }
@@ -179,4 +174,11 @@
 .invalidInput{
     border: 2.5px solid red !important;
 }
+.valid{
+    color:green;
+  }
+.invalid{
+color:red;
+}
+  
 

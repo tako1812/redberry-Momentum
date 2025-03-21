@@ -5,6 +5,15 @@ const ddd= document.querySelector(".default");
 
 const employeeLabel = document.querySelector(".employee-label");
 
+
+
+
+const statusSelect = document.querySelector(".statuses-container");
+const priorityContainer = document.querySelector(".dropdown-btn-prior");
+const taskdepartmentContainer = document.querySelector(".department-container");
+const employeeContainer = document.querySelector(".dropdown-btn-employee");
+
+
 const renderPriorities = async function () {
     prioritiesContainer.innerHTML = "";
     const res = await fetch(
@@ -204,9 +213,9 @@ const titleValidationText = document.querySelector(".title-validation-text");
 const descriptionValidationText = document.querySelector(".description-validation-text");
 
 const checkSymbols = (input) => input.trim().length >= 2 && input.trim().length <= 255;
-const emptyInput = (inputs) => inputs.trim() !== "";
-const validMinWords = (inputs) => inputs.trim().split(" ").length > 4;
-const validMaxSymbols = (input) => input.trim().length <= 255;
+const emptyInput = (inputs) => inputs.trim() === "";
+const validMinWords = (inputs) => inputs.trim().split(" ").length > 3;
+const validMaxSymbols = (input) => input.trim().length <= 255 && input.trim().length > 0;
 
 const dataInput = document.querySelector(".data-input");
 let deadlineData;
@@ -215,24 +224,13 @@ const config = {
     dateFormat: "d.m.Y",
     minDate: new Date().fp_incr(1),
 }
-const {data} =config.minDate;
-console.log(data);
 flatpickr(".data-input", config);
-/*
-const sss = function(selectedDates, dateStr, instance) {
-    console.log(dateStr);      
-} */
-//dataInput.addEventListener("change", sss);
-/*const checkDataValidation = function() {
-    deadlineData = dataInput.value;
-    console.log(deadlineData);
 
-}
-dataInput.addEventListener("change", checkDataValidation);*/
+
 const checkTitleValidation = function() {
   let result = true;
   let title = inputTitle.value;
-
+  
   if(checkSymbols(title)){ 
       titleValidationText.classList.add("valid");
       titleValidationText.classList.remove("invalid");
@@ -247,33 +245,25 @@ const checkTitleValidation = function() {
 const checkDescriptionValidation = function() {
   let result = true;
   let description = taskDescription.value;
+  
   if(validMinWords(description) || validMaxSymbols(description)){ 
       descriptionValidationText.classList.add("valid");
       descriptionValidationText.classList.remove("invalid");
   }
 
-  if(!validMinWords(description) || !validMaxSymbols(description)) {
+  if((!validMinWords(description) || !validMaxSymbols(description))) {
       descriptionValidationText.classList.add("invalid");
+      descriptionValidationText.classList.remove("valid");
       result = false;
-  } 
-  if(emptyInput(description)) {
-      descriptionValidationText.classList.remove("invalid");
+  }   
+  if(emptyInput(description)){
+    descriptionValidationText.classList.remove("invalid");
       descriptionValidationText.classList.remove("valid");
   }
-
   return result;
 }
-
 inputTitle.addEventListener("input", checkTitleValidation);
 taskDescription.addEventListener("input", checkDescriptionValidation);
-
-
-
-const statusSelect = document.querySelector(".statuses-container");
-const priorityContainer = document.querySelector(".dropdown-btn-prior");
-const taskdepartmentContainer = document.querySelector(".department-container");
-const employeeContainer = document.querySelector(".dropdown-btn-employee");
-
 
 
 const checkTaskDropdownsValidation = function() {
@@ -407,7 +397,8 @@ const sendJson = async function(url, uploadData) {
     console.log(formData);
     const datas = await sendJson("https://momentum.redberryinternship.ge/api/tasks",formData);
     console.log(datas);
-    window.location.href = "../index.html";
+
+    //window.location.href = "../index.html";
   };
   formCreateTask.addEventListener("submit",uploadData);
 

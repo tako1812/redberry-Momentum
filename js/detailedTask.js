@@ -224,7 +224,6 @@ function nestComments(comments) {
   let commentMap = new Map();
   let rootComments = [];
 
-
   comments.forEach(comment => {
       comment.children = [];
       commentMap.set(comment.id, comment);

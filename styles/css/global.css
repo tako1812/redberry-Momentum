@@ -699,10 +699,6 @@ body {
 .section-create-task .create-task-container .form .grids-container .btn-createTask-box {
   align-self: flex-end;
 }
-.section-create-task .create-task-container .form .grids-container .validation-text p {
-  color: #D9D9D9;
-  font-size: 1.1rem;
-}
 
 .dropdown-container {
   display: flex;
@@ -794,6 +790,14 @@ body {
 
 .invalidInput {
   border: 2.5px solid red !important;
+}
+
+.valid {
+  color: green;
+}
+
+.invalid {
+  color: red;
 }
 
 .detailed-section {

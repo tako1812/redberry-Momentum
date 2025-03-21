@@ -119,11 +119,15 @@ const statusesContainer = document.querySelector(".statuses-container");
 ///////////////////////////////////////////////////////
  
   const selectedDepartment = document.querySelector(".departments-dropdown");
-  //employeeContainer.innerHTML="";
   let btnEmployeeHasLisener = false;
   
   const renderEmployees = function(e) {
     employeeLabel.classList.remove("disable");
+
+    employeeFullname.textContent = "";
+    employeeImage.setAttribute("src", "");
+    employeeImage.classList.add("remove");
+    employeeIdData = null;
 
     if(!btnEmployeeHasLisener) {
       dropdownBtnEmployee.addEventListener("click", function(e) {
@@ -264,6 +268,7 @@ const checkDescriptionValidation = function() {
 }
 inputTitle.addEventListener("input", checkTitleValidation);
 taskDescription.addEventListener("input", checkDescriptionValidation);
+
 
 
 const checkTaskDropdownsValidation = function() {

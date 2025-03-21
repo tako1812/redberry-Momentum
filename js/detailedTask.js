@@ -169,9 +169,9 @@ const renderComments = async function () {
               </div>
             </div>
             <img class="comment-icon"src="../assets/icons/comment.png" alt="add comment icon">
-            <div class="author-container displayNone">
+            <div class="author-container">
               <div class="add-comment-container">
-                <form onsubmit ="uploadData(event, this,${data.id})"; class="form-textarea form-comment">
+                <form onsubmit ="uploadData(event, this,${data.id})"; class="displayNone form-textarea form-comment">
                   <textarea
                     name="description"
                     class="textarea"
@@ -208,7 +208,10 @@ const renderComments = async function () {
       const formCommentContainer = document.querySelector(".form-comment");
       
       const toggleCommentArea = function(e) {
-        formCommentContainer.classList.toggle("displayNone");
+        console.log(e.target);
+        const clicked = e.target.nextElementSibling.children;
+        
+        clicked[0].children[0].classList.toggle("displayNone");
       }
       commentIcons.forEach(icon => {
         icon.addEventListener("click", toggleCommentArea);

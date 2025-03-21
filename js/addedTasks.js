@@ -271,49 +271,33 @@ function formatDeadline(formdate) {
   return `${day} ${month}, ${year}`;
 };
 
+const setBackColor = function(department){
+  if(department === "ფინანსური დეპარტამენტი") {
+   return " #F7BC30";
+  }
+  if(department === "ადმინისტრაციული დეპარტამენტი") {
+   return" #FB5607;";
+ }
+ if(department === "მედიის დეპარტამენტი") {
+   return " #FF006E;";
+ }
+ if(department === "ტექნოლოგიების დეპარტამენტი") {
+   return " #3A86FF;";
+ }
+ if(department === "ადამიანური რესურსების დეპარტამენტი") {
+   return " #8338EC;";
+ }
+ if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
+   return " #8338EC;";
+ }
+ if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
+   return " #B588F4;";
+ }
+
+};
 
 const createCard = function (datas) {
-       /*
-    const getRandomColor = () => {
-    return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    };
-    const sss = datas.map(data => {
-      return data.department.name;
-    });
-    console.log(sss);
-    const deps = new Set(sss);
-    console.log(deps);
-    const result = deps.forEach(dep => {
-      dep.style.backgroundColor = getRandomColor();
-    });
-    console.log(result);*/
-     /*
-    const setBackColor = function(department){
-         if(department === "ფინანსური დეპარტამენტი") {
-          department.style.color = " #F7BC30";
-         }
-         if(department === "ადმინისტრაციული დეპარტამენტი") {
-          department.style.color =" #FB5607;";
-        }
-        if(department === "მედიის დეპარტამენტი") {
-          department.style.color = " #FF006E;";
-        }
-        if(department === "ტექნოლოგიების დეპარტამენტი") {
-          department.style.color = " #3A86FF;";
-        }
-        if(department === "ადამიანური რესურსების დეპარტამენტი") {
-          department.style.color = " #8338EC;";
-        }
-        if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
-          department.style.color = " #8338EC;";
-        }
-        if(department === "გაყიდვების და მარკეტინგის დეპარტამენტი") {
-          department.style.color = " #B588F4;";
-        }
-
-    };*/
-
-
+       
     datas.map(data =>{
         let html = `
         <div class="task-card" dataset = ${data.id}>
@@ -323,20 +307,20 @@ const createCard = function (datas) {
                         <img src="${data.priority.icon}"/>
                         <p>${data.priority.name}</p>
                     </div>
-                    <div class="department">${data.department.name ? shortenDepartmentsName(data.department.name) : data.department.name}</div>
+                    <div class="department" style="background-color: ${setBackColor(data.department.name)}">${data.department.name ? shortenDepartmentsName(data.department.name) : data.department.name}</div>
                 </div>
                 <p>${formatDeadline(data.due_date)}</p>
             </div>
             <div class="task-card-description">
                 <h3>${data.name}</h3>
-                <p>${data.description}
+                <p>${data.description ? data.description : ""}
                 </p>
             </div>
             <div class="task-card-employee">
                 <img src="${data.employee.avatar}"/>
                 <div>
                 <img src="./assets/images/Comments.png"/>
-                <p>8</p>
+                <p>${data.total_comments}</p>
                 </div>
             </div>
         </div>
@@ -398,6 +382,7 @@ function filterTasks() {
       });
     } 
     createCard(result);
+    return result.length;
 };
 
 //////////////////////////////////////////////////////
@@ -426,7 +411,10 @@ userSelectionsContainer.addEventListener("click", function (e) {
   document.querySelectorAll('[type="checkbox"]').forEach((item) => {
     item.checked = false;
   });
-  filterTasks();
+  const taskAmount = filterTasks();
+  if(taskAmount === tasksData.length){
+    btnClear.classList.add("hidden");
+  }
 });
 
 ///////////////////////////////////////////////////////////
